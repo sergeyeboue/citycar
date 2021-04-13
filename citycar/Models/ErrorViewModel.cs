@@ -1,5 +1,3 @@
-using System;
-
 namespace citycar.Models
 {
     public class ErrorViewModel
@@ -8,4 +6,5 @@ namespace citycar.Models
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
+
 }

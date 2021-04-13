@@ -47,6 +47,33 @@ namespace citycar.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Nom = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Proprietaire",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Nom = table.Column<string>(type: "TEXT", nullable: true),
+                    Prenom = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Proprietaire", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -152,6 +179,66 @@ namespace citycar.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Voitures",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Marque = table.Column<string>(type: "TEXT", nullable: true),
+                    Modele = table.Column<string>(type: "TEXT", nullable: true),
+                    Cylindree = table.Column<int>(type: "INTEGER", nullable: false),
+                    Prix = table.Column<double>(type: "REAL", nullable: false),
+                    ProprietaireId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CategoriesId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Voitures", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Voitures_Categories_CategoriesId",
+                        column: x => x.CategoriesId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Voitures_Proprietaire_ProprietaireId",
+                        column: x => x.ProprietaireId,
+                        principalTable: "Proprietaire",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Commentaire",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    TextCommentaire = table.Column<string>(type: "TEXT", nullable: true),
+                    Date = table.Column<string>(type: "TEXT", nullable: true),
+                    IdVoiture = table.Column<int>(type: "INTEGER", nullable: false),
+                    IdPersonne = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProprietaireId = table.Column<int>(type: "INTEGER", nullable: true),
+                    VoitureId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Commentaire", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Commentaire_Proprietaire_ProprietaireId",
+                        column: x => x.ProprietaireId,
+                        principalTable: "Proprietaire",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Commentaire_Voitures_VoitureId",
+                        column: x => x.VoitureId,
+                        principalTable: "Voitures",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -188,6 +275,26 @@ namespace citycar.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Commentaire_ProprietaireId",
+                table: "Commentaire",
+                column: "ProprietaireId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Commentaire_VoitureId",
+                table: "Commentaire",
+                column: "VoitureId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Voitures_CategoriesId",
+                table: "Voitures",
+                column: "CategoriesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Voitures_ProprietaireId",
+                table: "Voitures",
+                column: "ProprietaireId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -208,10 +315,22 @@ namespace citycar.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Commentaire");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Voitures");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Proprietaire");
         }
     }
 }

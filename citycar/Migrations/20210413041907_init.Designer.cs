@@ -9,7 +9,7 @@ using citycar.Data;
 namespace citycar.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210412215337_init")]
+    [Migration("20210413041907_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -214,6 +214,103 @@ namespace citycar.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("citycar.Models.Categories", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Nom")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("citycar.Models.Commentaire", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("IdPersonne")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IdVoiture")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("ProprietaireId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TextCommentaire")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("VoitureId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProprietaireId");
+
+                    b.HasIndex("VoitureId");
+
+                    b.ToTable("Commentaire");
+                });
+
+            modelBuilder.Entity("citycar.Models.Proprietaire", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Nom")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Prenom")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Proprietaire");
+                });
+
+            modelBuilder.Entity("citycar.Models.Voiture", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CategoriesId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Cylindree")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Marque")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Modele")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("Prix")
+                        .HasColumnType("REAL");
+
+                    b.Property<int>("ProprietaireId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoriesId");
+
+                    b.HasIndex("ProprietaireId");
+
+                    b.ToTable("Voitures");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -263,6 +360,47 @@ namespace citycar.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("citycar.Models.Commentaire", b =>
+                {
+                    b.HasOne("citycar.Models.Proprietaire", null)
+                        .WithMany("Commentaire")
+                        .HasForeignKey("ProprietaireId");
+
+                    b.HasOne("citycar.Models.Voiture", null)
+                        .WithMany("Commentaires")
+                        .HasForeignKey("VoitureId");
+                });
+
+            modelBuilder.Entity("citycar.Models.Voiture", b =>
+                {
+                    b.HasOne("citycar.Models.Categories", null)
+                        .WithMany("Voitures")
+                        .HasForeignKey("CategoriesId");
+
+                    b.HasOne("citycar.Models.Proprietaire", null)
+                        .WithMany("Voitures")
+                        .HasForeignKey("ProprietaireId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("citycar.Models.Categories", b =>
+                {
+                    b.Navigation("Voitures");
+                });
+
+            modelBuilder.Entity("citycar.Models.Proprietaire", b =>
+                {
+                    b.Navigation("Commentaire");
+
+                    b.Navigation("Voitures");
+                });
+
+            modelBuilder.Entity("citycar.Models.Voiture", b =>
+                {
+                    b.Navigation("Commentaires");
                 });
 #pragma warning restore 612, 618
         }
