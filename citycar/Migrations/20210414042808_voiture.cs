@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace citycar.Migrations
 {
-    public partial class init : Migration
+    public partial class voiture : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,7 +52,7 @@ namespace citycar.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Nom = table.Column<string>(type: "TEXT", nullable: true)
+                    NomCategories = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -189,15 +189,16 @@ namespace citycar.Migrations
                     Modele = table.Column<string>(type: "TEXT", nullable: true),
                     Cylindree = table.Column<int>(type: "INTEGER", nullable: false),
                     Prix = table.Column<double>(type: "REAL", nullable: false),
-                    ProprietaireId = table.Column<int>(type: "INTEGER", nullable: false),
-                    CategoriesId = table.Column<int>(type: "INTEGER", nullable: true)
+                    Image = table.Column<string>(type: "TEXT", nullable: true),
+                    ProprietaireId = table.Column<int>(type: "INTEGER", nullable: true),
+                    CategorieId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Voitures", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Voitures_Categories_CategoriesId",
-                        column: x => x.CategoriesId,
+                        name: "FK_Voitures_Categories_CategorieId",
+                        column: x => x.CategorieId,
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -206,7 +207,7 @@ namespace citycar.Migrations
                         column: x => x.ProprietaireId,
                         principalTable: "Proprietaire",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -216,21 +217,12 @@ namespace citycar.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     TextCommentaire = table.Column<string>(type: "TEXT", nullable: true),
-                    Date = table.Column<string>(type: "TEXT", nullable: true),
-                    IdVoiture = table.Column<int>(type: "INTEGER", nullable: false),
-                    IdPersonne = table.Column<int>(type: "INTEGER", nullable: false),
-                    ProprietaireId = table.Column<int>(type: "INTEGER", nullable: true),
+                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
                     VoitureId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Commentaire", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Commentaire_Proprietaire_ProprietaireId",
-                        column: x => x.ProprietaireId,
-                        principalTable: "Proprietaire",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Commentaire_Voitures_VoitureId",
                         column: x => x.VoitureId,
@@ -238,6 +230,71 @@ namespace citycar.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "NomCategories" },
+                values: new object[] { 1, "Berline" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "NomCategories" },
+                values: new object[] { 2, "SUV" });
+
+            migrationBuilder.InsertData(
+                table: "Proprietaire",
+                columns: new[] { "Id", "Nom", "Prenom" },
+                values: new object[] { 1, "Servais", "Jean" });
+
+            migrationBuilder.InsertData(
+                table: "Proprietaire",
+                columns: new[] { "Id", "Nom", "Prenom" },
+                values: new object[] { 2, "Dupont", "Luc" });
+
+            migrationBuilder.InsertData(
+                table: "Voitures",
+                columns: new[] { "Id", "CategorieId", "Cylindree", "Image", "Marque", "Modele", "Prix", "ProprietaireId" },
+                values: new object[] { 1, 2, 8, "1", "Mercedes", "G-class 2021", 500000.0, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Voitures",
+                columns: new[] { "Id", "CategorieId", "Cylindree", "Image", "Marque", "Modele", "Prix", "ProprietaireId" },
+                values: new object[] { 2, 2, 6, "2", "BMW", "X6 2019", 30000.0, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Voitures",
+                columns: new[] { "Id", "CategorieId", "Cylindree", "Image", "Marque", "Modele", "Prix", "ProprietaireId" },
+                values: new object[] { 6, 1, 8, "6", "McLaurent", "720s", 350000.0, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Voitures",
+                columns: new[] { "Id", "CategorieId", "Cylindree", "Image", "Marque", "Modele", "Prix", "ProprietaireId" },
+                values: new object[] { 3, 2, 8, "3", "lamborghini", "Urus 2020", 150000.0, 2 });
+
+            migrationBuilder.InsertData(
+                table: "Voitures",
+                columns: new[] { "Id", "CategorieId", "Cylindree", "Image", "Marque", "Modele", "Prix", "ProprietaireId" },
+                values: new object[] { 4, 2, 8, "4", "Ford", "Explorer 2018", 50000.0, 2 });
+
+            migrationBuilder.InsertData(
+                table: "Voitures",
+                columns: new[] { "Id", "CategorieId", "Cylindree", "Image", "Marque", "Modele", "Prix", "ProprietaireId" },
+                values: new object[] { 5, 1, 8, "5", "Ferrari", "458 Italia", 50000.0, 2 });
+
+            migrationBuilder.InsertData(
+                table: "Commentaire",
+                columns: new[] { "Id", "Date", "TextCommentaire", "VoitureId" },
+                values: new object[] { 1, new DateTime(2021, 4, 13, 23, 28, 7, 211, DateTimeKind.Local).AddTicks(9698), "Premier commentaire", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Commentaire",
+                columns: new[] { "Id", "Date", "TextCommentaire", "VoitureId" },
+                values: new object[] { 2, new DateTime(2021, 4, 13, 23, 28, 7, 215, DateTimeKind.Local).AddTicks(3270), "Un Autre commentaire", 2 });
+
+            migrationBuilder.InsertData(
+                table: "Commentaire",
+                columns: new[] { "Id", "Date", "TextCommentaire", "VoitureId" },
+                values: new object[] { 3, new DateTime(2021, 4, 13, 23, 28, 7, 215, DateTimeKind.Local).AddTicks(3501), "Encore un Autre commentaire", 6 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -277,19 +334,14 @@ namespace citycar.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Commentaire_ProprietaireId",
-                table: "Commentaire",
-                column: "ProprietaireId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Commentaire_VoitureId",
                 table: "Commentaire",
                 column: "VoitureId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Voitures_CategoriesId",
+                name: "IX_Voitures_CategorieId",
                 table: "Voitures",
-                column: "CategoriesId");
+                column: "CategorieId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Voitures_ProprietaireId",

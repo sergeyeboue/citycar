@@ -1,6 +1,44 @@
-﻿@{ ViewData["Title"] = "Home Page"; }
+﻿@model IEnumerable<citycar.Models.Voiture>
+@{ViewData["Title"] = "Home Page"; }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
+    <div class="d-inline-block m-4">
+
+        <!--Block de voiture-->
+        @foreach (var item in Model)
+        {
+            <div class="d-inline-block border">
+
+                <div class="container mt-2">
+                    <p>propriétaire : <a href="#">nom et prenom</a></p>
+                </div>
+
+                <div class="container">
+                    <p>
+                        @item.Marque - @item.Modele<br />
+                        <a asp-controller="VoituresController" asp-action="Details" asp-route-id="@item.Id" ><img src="@item.Image + ".jpg"  alt="@{item.Marque + item.Modele} " class="img-thumbnail" style="max-width:300px" /></a>
+                    </p>
+
+                </div>
+
+
+                <div class="container">
+                    <p>
+                        Commentaires :
+                        <ul class="list-unstyled">
+                            <li>Lorem ipsum dolor sit amet...</li>
+                            <li>Lorem ipsum dolor sit amet...</li>
+                        </ul>
+                        <a href="#">Ajouter un commentaire</a>
+                    </p>
+                </div>
+            </div>
+        }
+
+
+
+    </div>
+
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

@@ -9,8 +9,8 @@ using citycar.Data;
 namespace citycar.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210413041907_init")]
-    partial class init
+    [Migration("20210414042808_voiture")]
+    partial class voiture
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -220,12 +220,24 @@ namespace citycar.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Nom")
+                    b.Property<string>("NomCategories")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            NomCategories = "Berline"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            NomCategories = "SUV"
+                        });
                 });
 
             modelBuilder.Entity("citycar.Models.Commentaire", b =>
@@ -234,17 +246,8 @@ namespace citycar.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("IdPersonne")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("IdVoiture")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("ProprietaireId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("TextCommentaire")
                         .HasColumnType("TEXT");
@@ -254,11 +257,32 @@ namespace citycar.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProprietaireId");
-
                     b.HasIndex("VoitureId");
 
                     b.ToTable("Commentaire");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateTime(2021, 4, 13, 23, 28, 7, 211, DateTimeKind.Local).AddTicks(9698),
+                            TextCommentaire = "Premier commentaire",
+                            VoitureId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateTime(2021, 4, 13, 23, 28, 7, 215, DateTimeKind.Local).AddTicks(3270),
+                            TextCommentaire = "Un Autre commentaire",
+                            VoitureId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Date = new DateTime(2021, 4, 13, 23, 28, 7, 215, DateTimeKind.Local).AddTicks(3501),
+                            TextCommentaire = "Encore un Autre commentaire",
+                            VoitureId = 6
+                        });
                 });
 
             modelBuilder.Entity("citycar.Models.Proprietaire", b =>
@@ -276,6 +300,20 @@ namespace citycar.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Proprietaire");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nom = "Servais",
+                            Prenom = "Jean"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nom = "Dupont",
+                            Prenom = "Luc"
+                        });
                 });
 
             modelBuilder.Entity("citycar.Models.Voiture", b =>
@@ -284,11 +322,14 @@ namespace citycar.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("CategoriesId")
+                    b.Property<int?>("CategorieId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Cylindree")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Marque")
                         .HasColumnType("TEXT");
@@ -299,16 +340,84 @@ namespace citycar.Migrations
                     b.Property<double>("Prix")
                         .HasColumnType("REAL");
 
-                    b.Property<int>("ProprietaireId")
+                    b.Property<int?>("ProprietaireId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoriesId");
+                    b.HasIndex("CategorieId");
 
                     b.HasIndex("ProprietaireId");
 
                     b.ToTable("Voitures");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategorieId = 2,
+                            Cylindree = 8,
+                            Image = "1",
+                            Marque = "Mercedes",
+                            Modele = "G-class 2021",
+                            Prix = 500000.0,
+                            ProprietaireId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategorieId = 2,
+                            Cylindree = 6,
+                            Image = "2",
+                            Marque = "BMW",
+                            Modele = "X6 2019",
+                            Prix = 30000.0,
+                            ProprietaireId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategorieId = 2,
+                            Cylindree = 8,
+                            Image = "3",
+                            Marque = "lamborghini",
+                            Modele = "Urus 2020",
+                            Prix = 150000.0,
+                            ProprietaireId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategorieId = 2,
+                            Cylindree = 8,
+                            Image = "4",
+                            Marque = "Ford",
+                            Modele = "Explorer 2018",
+                            Prix = 50000.0,
+                            ProprietaireId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategorieId = 1,
+                            Cylindree = 8,
+                            Image = "5",
+                            Marque = "Ferrari",
+                            Modele = "458 Italia",
+                            Prix = 50000.0,
+                            ProprietaireId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategorieId = 1,
+                            Cylindree = 8,
+                            Image = "6",
+                            Marque = "McLaurent",
+                            Modele = "720s",
+                            Prix = 350000.0,
+                            ProprietaireId = 1
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -364,26 +473,26 @@ namespace citycar.Migrations
 
             modelBuilder.Entity("citycar.Models.Commentaire", b =>
                 {
-                    b.HasOne("citycar.Models.Proprietaire", null)
-                        .WithMany("Commentaire")
-                        .HasForeignKey("ProprietaireId");
-
-                    b.HasOne("citycar.Models.Voiture", null)
+                    b.HasOne("citycar.Models.Voiture", "Voiture")
                         .WithMany("Commentaires")
                         .HasForeignKey("VoitureId");
+
+                    b.Navigation("Voiture");
                 });
 
             modelBuilder.Entity("citycar.Models.Voiture", b =>
                 {
-                    b.HasOne("citycar.Models.Categories", null)
+                    b.HasOne("citycar.Models.Categories", "Categorie")
                         .WithMany("Voitures")
-                        .HasForeignKey("CategoriesId");
+                        .HasForeignKey("CategorieId");
 
-                    b.HasOne("citycar.Models.Proprietaire", null)
+                    b.HasOne("citycar.Models.Proprietaire", "Proprietaire")
                         .WithMany("Voitures")
-                        .HasForeignKey("ProprietaireId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProprietaireId");
+
+                    b.Navigation("Categorie");
+
+                    b.Navigation("Proprietaire");
                 });
 
             modelBuilder.Entity("citycar.Models.Categories", b =>
@@ -393,8 +502,6 @@ namespace citycar.Migrations
 
             modelBuilder.Entity("citycar.Models.Proprietaire", b =>
                 {
-                    b.Navigation("Commentaire");
-
                     b.Navigation("Voitures");
                 });
 

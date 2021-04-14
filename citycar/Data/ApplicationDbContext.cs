@@ -10,13 +10,191 @@ namespace citycar.Data
     public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<Voiture> Voitures { get; set; }
+        public DbSet<citycar.Models.Proprietaire> Proprietaire { get; set; }
+        public DbSet<citycar.Models.Categories> Categories { get; set; }
+        public DbSet<citycar.Models.Commentaire> Commentaire { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
-        public DbSet<citycar.Models.Proprietaire> Proprietaire { get; set; }
-        public DbSet<citycar.Models.Categories> Categories { get; set; }
-        public DbSet<citycar.Models.Commentaire> Commentaire { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            #region seeVoiture
+            modelBuilder.Entity<Voiture>()
+                .HasData(
+                    new
+                    {
+                        
+                        Id = 1,
+                        Marque = "Mercedes",
+                        Modele = "G-class 2021",
+                        Cylindree = 8,
+                        Prix = 500_000.00,
+                        Image = "1",
+                        ProprietaireId = 1,
+                        CategorieId = 2
+                    }
+                    );
+
+            modelBuilder.Entity<Voiture>()
+                .HasData(
+                    new
+                    {
+
+                        Id = 2,
+                        Marque = "BMW",
+                        Modele = "X6 2019",
+                        Cylindree = 6,
+                        Prix = 30_000.00,
+                        Image = "2",
+                        ProprietaireId = 1,
+                        CategorieId = 2
+                    }
+                    );
+
+            modelBuilder.Entity<Voiture>()
+                .HasData(
+                    new
+                    {
+
+                        Id = 3,
+                        Marque = "lamborghini",
+                        Modele = "Urus 2020",
+                        Cylindree = 8,
+                        Prix = 150_000.00,
+                        Image = "3",
+                        ProprietaireId = 2,
+                        CategorieId = 2
+                    }
+                    );
+
+            modelBuilder.Entity<Voiture>()
+                .HasData(
+                    new
+                    {
+
+                        Id = 4,
+                        Marque = "Ford",
+                        Modele = "Explorer 2018",
+                        Cylindree = 8,
+                        Prix = 50_000.00,
+                        Image = "4",
+                        ProprietaireId = 2,
+                        CategorieId = 2
+                    }
+                    );
+            modelBuilder.Entity<Voiture>()
+                .HasData(
+                    new
+                    {
+
+                        Id = 5,
+                        Marque = "Ferrari",
+                        Modele = "458 Italia",
+                        Cylindree = 8,
+                        Prix = 50_000.00,
+                        Image = "5",
+                        ProprietaireId = 2,
+                        CategorieId = 1
+                    }
+                    );
+            modelBuilder.Entity<Voiture>()
+                .HasData(
+                    new
+                    {
+
+                        Id = 6,
+                        Marque = "McLaurent",
+                        Modele = "720s",
+                        Cylindree = 8,
+                        Prix = 350_000.00,
+                        Image = "6",
+                        ProprietaireId = 1,
+                        CategorieId = 1
+                    }
+                    );
+            #endregion
+
+
+            #region seeProprietaire
+            modelBuilder.Entity<Proprietaire>()
+                .HasData(
+                    new
+                    {
+                        Id = 1,
+                        Nom = "Servais",
+                        Prenom = "Jean"
+                    }
+                    );
+            modelBuilder.Entity<Proprietaire>()
+                .HasData(
+                    new
+                    {
+                        Id = 2,
+                        Nom = "Dupont",
+                        Prenom = "Luc"
+                    }
+                    );
+            #endregion
+
+            #region seeCategorie
+            modelBuilder.Entity<Categories>()
+                .HasData(
+                    new
+                    {
+                        Id = 1,
+                        NomCategories = "Berline"
+                    }
+                    );
+            modelBuilder.Entity<Categories>()
+                .HasData(
+                    new
+                    {
+                        Id = 2,
+                        NomCategories = "SUV"
+                    }
+                    );
+            #endregion
+
+            #region seeCommentaire
+            modelBuilder.Entity<Commentaire>()
+                .HasData(
+                    new
+                    {
+                        Id = 1,
+                        TextCommentaire = "Premier commentaire",
+                        Date = DateTime.Now,
+                        VoitureId = 1
+                    }
+                    );
+
+            modelBuilder.Entity<Commentaire>()
+                .HasData(
+                    new
+                    {
+                        Id = 2,
+                        TextCommentaire = "Un Autre commentaire",
+                        Date = DateTime.Now,
+                        VoitureId = 2
+                    }
+                    );
+
+            modelBuilder.Entity<Commentaire>()
+                .HasData(
+                    new
+                    {
+                        Id = 3,
+                        TextCommentaire = "Encore un Autre commentaire",
+                        Date = DateTime.Now,
+                        VoitureId = 6
+                    }
+                    );
+            #endregion
+        }
+
 
     }
 }

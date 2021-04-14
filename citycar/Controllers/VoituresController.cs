@@ -54,7 +54,7 @@ namespace citycar.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Marque,Modele,Cylindree,Prix,ProprietaireId")] Voiture voiture)
+        public async Task<IActionResult> Create([Bind("Id,Marque,Modele,Cylindree,Prix,Image")] Voiture voiture)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace citycar.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Marque,Modele,Cylindree,Prix,ProprietaireId")] Voiture voiture)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Marque,Modele,Cylindree,Prix,Image")] Voiture voiture)
         {
             if (id != voiture.Id)
             {
