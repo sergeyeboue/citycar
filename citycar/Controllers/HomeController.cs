@@ -24,7 +24,11 @@ namespace citycar.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Voitures.ToListAsync());
+            return View(await _context.Voitures
+                .Include(x => x.Proprietaire)
+                .Include(x => x.Categorie)
+                .Include(x => x.Commentaires)
+                .ToListAsync());
         }
 
         public IActionResult Privacy()

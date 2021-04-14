@@ -33,7 +33,7 @@ namespace citycar.Data
                         Modele = "G-class 2021",
                         Cylindree = 8,
                         Prix = 500_000.00,
-                        Image = "1",
+                        Image = "1.jpg",
                         ProprietaireId = 1,
                         CategorieId = 2
                     }
@@ -49,7 +49,7 @@ namespace citycar.Data
                         Modele = "X6 2019",
                         Cylindree = 6,
                         Prix = 30_000.00,
-                        Image = "2",
+                        Image = "2.jpg",
                         ProprietaireId = 1,
                         CategorieId = 2
                     }
@@ -65,7 +65,7 @@ namespace citycar.Data
                         Modele = "Urus 2020",
                         Cylindree = 8,
                         Prix = 150_000.00,
-                        Image = "3",
+                        Image = "3.jpg",
                         ProprietaireId = 2,
                         CategorieId = 2
                     }
@@ -81,7 +81,7 @@ namespace citycar.Data
                         Modele = "Explorer 2018",
                         Cylindree = 8,
                         Prix = 50_000.00,
-                        Image = "4",
+                        Image = "4.jpg",
                         ProprietaireId = 2,
                         CategorieId = 2
                     }
@@ -96,7 +96,7 @@ namespace citycar.Data
                         Modele = "458 Italia",
                         Cylindree = 8,
                         Prix = 50_000.00,
-                        Image = "5",
+                        Image = "5.jpg",
                         ProprietaireId = 2,
                         CategorieId = 1
                     }
@@ -111,7 +111,7 @@ namespace citycar.Data
                         Modele = "720s",
                         Cylindree = 8,
                         Prix = 350_000.00,
-                        Image = "6",
+                        Image = "6.jpg",
                         ProprietaireId = 1,
                         CategorieId = 1
                     }
@@ -187,6 +187,36 @@ namespace citycar.Data
                     new
                     {
                         Id = 3,
+                        TextCommentaire = "Encore un Autre commentaire",
+                        Date = DateTime.Now,
+                        VoitureId = 3
+                    }
+                    );
+            modelBuilder.Entity<Commentaire>()
+                .HasData(
+                    new
+                    {
+                        Id = 4,
+                        TextCommentaire = "Encore un Autre commentaire",
+                        Date = DateTime.Now,
+                        VoitureId = 4
+                    }
+                    );
+            modelBuilder.Entity<Commentaire>()
+                .HasData(
+                    new
+                    {
+                        Id = 5,
+                        TextCommentaire = "Encore un Autre commentaire",
+                        Date = DateTime.Now,
+                        VoitureId = 5
+                    }
+                    );
+            modelBuilder.Entity<Commentaire>()
+                .HasData(
+                    new
+                    {
+                        Id = 6,
                         TextCommentaire = "Encore un Autre commentaire",
                         Date = DateTime.Now,
                         VoitureId = 6

@@ -254,47 +254,62 @@ namespace citycar.Migrations
             migrationBuilder.InsertData(
                 table: "Voitures",
                 columns: new[] { "Id", "CategorieId", "Cylindree", "Image", "Marque", "Modele", "Prix", "ProprietaireId" },
-                values: new object[] { 1, 2, 8, "1", "Mercedes", "G-class 2021", 500000.0, 1 });
+                values: new object[] { 1, 2, 8, "1.jpg", "Mercedes", "G-class 2021", 500000.0, 1 });
 
             migrationBuilder.InsertData(
                 table: "Voitures",
                 columns: new[] { "Id", "CategorieId", "Cylindree", "Image", "Marque", "Modele", "Prix", "ProprietaireId" },
-                values: new object[] { 2, 2, 6, "2", "BMW", "X6 2019", 30000.0, 1 });
+                values: new object[] { 2, 2, 6, "2.jpg", "BMW", "X6 2019", 30000.0, 1 });
 
             migrationBuilder.InsertData(
                 table: "Voitures",
                 columns: new[] { "Id", "CategorieId", "Cylindree", "Image", "Marque", "Modele", "Prix", "ProprietaireId" },
-                values: new object[] { 6, 1, 8, "6", "McLaurent", "720s", 350000.0, 1 });
+                values: new object[] { 6, 1, 8, "6.jpg", "McLaurent", "720s", 350000.0, 1 });
 
             migrationBuilder.InsertData(
                 table: "Voitures",
                 columns: new[] { "Id", "CategorieId", "Cylindree", "Image", "Marque", "Modele", "Prix", "ProprietaireId" },
-                values: new object[] { 3, 2, 8, "3", "lamborghini", "Urus 2020", 150000.0, 2 });
+                values: new object[] { 3, 2, 8, "3.jpg", "lamborghini", "Urus 2020", 150000.0, 2 });
 
             migrationBuilder.InsertData(
                 table: "Voitures",
                 columns: new[] { "Id", "CategorieId", "Cylindree", "Image", "Marque", "Modele", "Prix", "ProprietaireId" },
-                values: new object[] { 4, 2, 8, "4", "Ford", "Explorer 2018", 50000.0, 2 });
+                values: new object[] { 4, 2, 8, "4.jpg", "Ford", "Explorer 2018", 50000.0, 2 });
 
             migrationBuilder.InsertData(
                 table: "Voitures",
                 columns: new[] { "Id", "CategorieId", "Cylindree", "Image", "Marque", "Modele", "Prix", "ProprietaireId" },
-                values: new object[] { 5, 1, 8, "5", "Ferrari", "458 Italia", 50000.0, 2 });
+                values: new object[] { 5, 1, 8, "5.jpg", "Ferrari", "458 Italia", 50000.0, 2 });
 
             migrationBuilder.InsertData(
                 table: "Commentaire",
                 columns: new[] { "Id", "Date", "TextCommentaire", "VoitureId" },
-                values: new object[] { 1, new DateTime(2021, 4, 13, 23, 28, 7, 211, DateTimeKind.Local).AddTicks(9698), "Premier commentaire", 1 });
+                values: new object[] { 1, new DateTime(2021, 4, 14, 1, 2, 19, 111, DateTimeKind.Local).AddTicks(892), "Premier commentaire", 1 });
 
             migrationBuilder.InsertData(
                 table: "Commentaire",
                 columns: new[] { "Id", "Date", "TextCommentaire", "VoitureId" },
-                values: new object[] { 2, new DateTime(2021, 4, 13, 23, 28, 7, 215, DateTimeKind.Local).AddTicks(3270), "Un Autre commentaire", 2 });
+                values: new object[] { 2, new DateTime(2021, 4, 14, 1, 2, 19, 113, DateTimeKind.Local).AddTicks(7722), "Un Autre commentaire", 2 });
 
             migrationBuilder.InsertData(
                 table: "Commentaire",
                 columns: new[] { "Id", "Date", "TextCommentaire", "VoitureId" },
-                values: new object[] { 3, new DateTime(2021, 4, 13, 23, 28, 7, 215, DateTimeKind.Local).AddTicks(3501), "Encore un Autre commentaire", 6 });
+                values: new object[] { 6, new DateTime(2021, 4, 14, 1, 2, 19, 113, DateTimeKind.Local).AddTicks(7857), "Encore un Autre commentaire", 6 });
+
+            migrationBuilder.InsertData(
+                table: "Commentaire",
+                columns: new[] { "Id", "Date", "TextCommentaire", "VoitureId" },
+                values: new object[] { 3, new DateTime(2021, 4, 14, 1, 2, 19, 113, DateTimeKind.Local).AddTicks(7791), "Encore un Autre commentaire", 3 });
+
+            migrationBuilder.InsertData(
+                table: "Commentaire",
+                columns: new[] { "Id", "Date", "TextCommentaire", "VoitureId" },
+                values: new object[] { 4, new DateTime(2021, 4, 14, 1, 2, 19, 113, DateTimeKind.Local).AddTicks(7814), "Encore un Autre commentaire", 4 });
+
+            migrationBuilder.InsertData(
+                table: "Commentaire",
+                columns: new[] { "Id", "Date", "TextCommentaire", "VoitureId" },
+                values: new object[] { 5, new DateTime(2021, 4, 14, 1, 2, 19, 113, DateTimeKind.Local).AddTicks(7832), "Encore un Autre commentaire", 5 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

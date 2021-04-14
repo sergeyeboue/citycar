@@ -5,36 +5,40 @@
     <h1 class="display-4">Welcome</h1>
     <div class="d-inline-block m-4">
 
-        <!--Block de voiture-->
+        @*block de voiture*@
         @foreach (var item in Model)
         {
-            <div class="d-inline-block border">
 
-                <div class="container mt-2">
-                    <p>propriétaire : <a href="#">nom et prenom</a></p>
-                </div>
+<div class="d-inline-block border m-3 p-5" style="height: auto; width:350px;">
 
-                <div class="container">
-                    <p>
-                        @item.Marque - @item.Modele<br />
-                        <a asp-controller="VoituresController" asp-action="Details" asp-route-id="@item.Id" ><img src="@item.Image + ".jpg"  alt="@{item.Marque + item.Modele} " class="img-thumbnail" style="max-width:300px" /></a>
-                    </p>
+    <div class="container mt-2">
+        <p>propriétaire : <a href="#">@item.Proprietaire.NomComplet</a></p>
+    </div>
 
-                </div>
+    <div class="container">
+        <p>
+            @item.Marque - @item.Modele - @item.Categorie.NomCategories
+            <br />
+            <a href="#"><img src="~/img/@item.Image" alt=" " class="img-thumbnail" style="max-width:300px; max-height:100px" /></a>
+        </p>
+
+    </div>
 
 
-                <div class="container">
-                    <p>
-                        Commentaires :
-                        <ul class="list-unstyled">
-                            <li>Lorem ipsum dolor sit amet...</li>
-                            <li>Lorem ipsum dolor sit amet...</li>
-                        </ul>
-                        <a href="#">Ajouter un commentaire</a>
-                    </p>
-                </div>
-            </div>
-        }
+    <div class="container">
+        <p>
+            commentaires :
+            <ul class="list-unstyled">
+                @foreach (var commentaire in item.Commentaires)
+                {
+                    <li style="max-width:200px; font-size:10px" >@commentaire.Date : @commentaire.TextCommentaire</li>
+                }
+
+            </ul>
+            <a href="#">ajouter un commentaire</a>
+        </p>
+    </div>
+</div>}
 
 
 

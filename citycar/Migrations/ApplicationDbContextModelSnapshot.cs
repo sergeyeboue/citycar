@@ -263,21 +263,42 @@ namespace citycar.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 4, 13, 23, 28, 7, 211, DateTimeKind.Local).AddTicks(9698),
+                            Date = new DateTime(2021, 4, 14, 1, 2, 19, 111, DateTimeKind.Local).AddTicks(892),
                             TextCommentaire = "Premier commentaire",
                             VoitureId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2021, 4, 13, 23, 28, 7, 215, DateTimeKind.Local).AddTicks(3270),
+                            Date = new DateTime(2021, 4, 14, 1, 2, 19, 113, DateTimeKind.Local).AddTicks(7722),
                             TextCommentaire = "Un Autre commentaire",
                             VoitureId = 2
                         },
                         new
                         {
                             Id = 3,
-                            Date = new DateTime(2021, 4, 13, 23, 28, 7, 215, DateTimeKind.Local).AddTicks(3501),
+                            Date = new DateTime(2021, 4, 14, 1, 2, 19, 113, DateTimeKind.Local).AddTicks(7791),
+                            TextCommentaire = "Encore un Autre commentaire",
+                            VoitureId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Date = new DateTime(2021, 4, 14, 1, 2, 19, 113, DateTimeKind.Local).AddTicks(7814),
+                            TextCommentaire = "Encore un Autre commentaire",
+                            VoitureId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Date = new DateTime(2021, 4, 14, 1, 2, 19, 113, DateTimeKind.Local).AddTicks(7832),
+                            TextCommentaire = "Encore un Autre commentaire",
+                            VoitureId = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Date = new DateTime(2021, 4, 14, 1, 2, 19, 113, DateTimeKind.Local).AddTicks(7857),
                             TextCommentaire = "Encore un Autre commentaire",
                             VoitureId = 6
                         });
@@ -355,7 +376,7 @@ namespace citycar.Migrations
                             Id = 1,
                             CategorieId = 2,
                             Cylindree = 8,
-                            Image = "1",
+                            Image = "1.jpg",
                             Marque = "Mercedes",
                             Modele = "G-class 2021",
                             Prix = 500000.0,
@@ -366,7 +387,7 @@ namespace citycar.Migrations
                             Id = 2,
                             CategorieId = 2,
                             Cylindree = 6,
-                            Image = "2",
+                            Image = "2.jpg",
                             Marque = "BMW",
                             Modele = "X6 2019",
                             Prix = 30000.0,
@@ -377,7 +398,7 @@ namespace citycar.Migrations
                             Id = 3,
                             CategorieId = 2,
                             Cylindree = 8,
-                            Image = "3",
+                            Image = "3.jpg",
                             Marque = "lamborghini",
                             Modele = "Urus 2020",
                             Prix = 150000.0,
@@ -388,7 +409,7 @@ namespace citycar.Migrations
                             Id = 4,
                             CategorieId = 2,
                             Cylindree = 8,
-                            Image = "4",
+                            Image = "4.jpg",
                             Marque = "Ford",
                             Modele = "Explorer 2018",
                             Prix = 50000.0,
@@ -399,7 +420,7 @@ namespace citycar.Migrations
                             Id = 5,
                             CategorieId = 1,
                             Cylindree = 8,
-                            Image = "5",
+                            Image = "5.jpg",
                             Marque = "Ferrari",
                             Modele = "458 Italia",
                             Prix = 50000.0,
@@ -410,7 +431,7 @@ namespace citycar.Migrations
                             Id = 6,
                             CategorieId = 1,
                             Cylindree = 8,
-                            Image = "6",
+                            Image = "6.jpg",
                             Marque = "McLaurent",
                             Modele = "720s",
                             Prix = 350000.0,
