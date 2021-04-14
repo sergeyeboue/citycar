@@ -31,6 +31,50 @@ namespace citycar.Controllers
                 .ToListAsync());
         }
 
+        //afficher en fonction de la recherche
+        [HttpPost]
+        public async Task<IActionResult> Index(Voiture car, Categories categories)
+        {
+            if (car.Marque == null && categories.NomCategories == null)
+            {
+                return View(await _context.Voitures
+                .Include(x => x.Proprietaire)
+                .Include(x => x.Categorie)
+                .Include(x => x.Commentaires)
+                .ToListAsync());
+            }
+            if (car.Marque != null && categories.NomCategories == null)
+            {
+                var voiture = await _context.Voitures
+                 .Include(x => x.Proprietaire)
+                 .Include(x => x.Categorie)
+                 .Include(x => x.Commentaires)
+                 .Where(x => x.Marque == car.Marque)
+                 .ToListAsync();
+                return View(voiture);
+            }
+            if (car.Marque == null && categories.NomCategories != null)
+            {
+                var voiture = await _context.Voitures
+                 .Include(x => x.Proprietaire)
+                 .Include(x => x.Categorie)
+                 .Include(x => x.Commentaires)
+                 .Where(x => x.Categorie.NomCategories == categories.NomCategories)
+                 .ToListAsync();
+                return View(voiture);
+            }
+            else
+            {
+                var voiture = await _context.Voitures
+               .Include(x => x.Proprietaire)
+               .Include(x => x.Categorie).Where(x => x.Categorie.NomCategories == categories.NomCategories)
+               .Include(x => x.Commentaires)
+               .Where(x => x.Marque == car.Marque)
+               .ToListAsync();
+                return View(voiture);
+            }
+        }
+
         public IActionResult Privacy()
         {
             return View();

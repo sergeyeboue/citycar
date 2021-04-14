@@ -1,11 +1,29 @@
 ﻿@model IEnumerable<citycar.Models.Voiture>
 @{ViewData["Title"] = "Home Page"; }
-
 <div class="text-center">
+
     <h1 class="display-4">Welcome</h1>
+
+    @*Block de recherche*@
+    <form asp-action="Index">
+        <label for="Marque-select">Marque :</label>
+        <select name="marque" id="Marque-select" >
+            <option value="">--Veuillez choisir une option--</option>
+            <option value="BMW" >BMW</option>
+            <option value="Mercedes">MERCEDES</option>
+        </select>
+        <label for="Categorie-select">Catégorie :</label>
+        <select name="NomCategories" id="Categorie-select">
+            <option value="">--Veuillez choisir une option--</option>
+            <option value="Berline">Berline</option>
+            <option value="SUV">SUV</option>
+        </select>
+            <input type="submit" value="Recherche" class="btn btn-primary p-0 mb-1" style="height:30px"/>
+    </form>   
+
+    @*block des voitures*@
     <div class="d-inline-block m-4">
 
-        @*block de voiture*@
         @foreach (var item in Model)
         {
 
@@ -31,16 +49,13 @@
             <ul class="list-unstyled">
                 @foreach (var commentaire in item.Commentaires)
                 {
-                    <li style="max-width:200px; font-size:10px" >@commentaire.Date : @commentaire.TextCommentaire</li>
-                }
+<li style="max-width:200px; font-size:10px">@commentaire.Date : @commentaire.TextCommentaire</li>}
 
             </ul>
             <a href="#">ajouter un commentaire</a>
         </p>
     </div>
 </div>}
-
-
 
     </div>
 
