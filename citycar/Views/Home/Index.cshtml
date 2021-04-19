@@ -30,14 +30,14 @@
 <div class="d-inline-block border m-3 p-5" style="height: auto; width:350px;">
 
     <div class="container mt-2">
-        <p>propriétaire : <a href="#">@item.Proprietaire.NomComplet</a></p>
+        <p>propriétaire : <a asp-controller="Proprietaires" asp-action="Details" asp-route-id="@item.Proprietaire.Id">@item.Proprietaire.NomComplet</a></p>
     </div>
 
     <div class="container">
         <p>
             @item.Marque - @item.Modele - @item.Categorie.NomCategories
             <br />
-            <a href="#"><img src="~/img/@item.Image" alt=" " class="img-thumbnail" style="max-width:300px; max-height:100px" /></a>
+            <a asp-controller="Voitures" asp-action="Details" asp-route-id="@item.Id"><img src="~/img/@item.Image" alt=" " class="img-thumbnail" style="max-width:300px; max-height:100px" /></a>
         </p>
 
     </div>
