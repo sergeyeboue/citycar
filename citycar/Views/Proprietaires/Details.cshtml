@@ -26,6 +26,69 @@
             @Html.DisplayFor(model => model.Prenom)
         </dd>
     </dl>
+    <h5>Liste des voitures</h5>
+    <a href="#">Ajouter Voiture</a>
+    <hr />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Marque
+                    </th>
+                    <th>
+                        Modele
+                    </th>
+                    <th>
+                        Cylindree
+                    </th>
+                    <th>
+                        Prix
+                    </th>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var voiture in Model.Voitures)
+                {
+                    <tr>
+                        <td>
+                            @voiture.Marque
+                        </td>
+                        <td>
+                            @voiture.Modele
+                        </td>
+                        <td>
+                            @voiture.Cylindree
+                        </td>
+                        <td>
+                            @voiture.Prix
+                        </td>
+                        <td>
+                            @voiture.Image
+                        </td>
+                        <td>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <a asp-controller="Voitures" asp-action="Edit" asp-route-id="@voiture.Id">Edit |</a>
+                                <a asp-controller="Voitures" asp-action="Details" asp-route-id="@voiture.Id">Details |</a>
+                                <a asp-controller="Voitures" asp-action="Delete" asp-route-id="@voiture.Id">Delete</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Voitures" asp-action="Details" asp-route-id="@voiture.Id">Details </a>
+                            }
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
 </div>
 <div>
     @if (SignInManager.IsSignedIn(User))

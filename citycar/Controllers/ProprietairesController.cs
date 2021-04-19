@@ -34,6 +34,7 @@ namespace citycar.Controllers
             }
 
             var proprietaire = await _context.Proprietaire
+                .Include(x => x.Voitures)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (proprietaire == null)
             {
