@@ -45,14 +45,18 @@
 
     <div class="container">
         <p>
-            commentaires :
+            Dernier commentaire :
             <ul class="list-unstyled">
-                @foreach (var commentaire in item.Commentaires)
-                {
-<li style="max-width:200px; font-size:10px">@commentaire.Date : @commentaire.TextCommentaire</li>}
+                @{
+                    var num = item.Commentaires.Count;
+                    var commentaire = item.Commentaires.ElementAt(num - 1);
+                    <li style="max-width:200px; font-size:10px"> @commentaire.Date :  @commentaire.TextCommentaire</li>
+
+                }
+
 
             </ul>
-            <a href="#">ajouter un commentaire</a>
+            <a asp-controller="Voitures" asp-action="Details" asp-route-id="@item.Id">ajouter un commentaire</a>
         </p>
     </div>
 </div>}
