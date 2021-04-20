@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using citycar.Data;
 using citycar.Models;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace citycar.Controllers
 {
@@ -22,7 +24,7 @@ namespace citycar.Controllers
         // GET: Voitures
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Voitures.ToListAsync());
+            return View(await _context.Voitures.Include(x => x.Proprietaire).Include(x => x.Categorie).ToListAsync());
         }
 
         // GET: Voitures/Details/5
@@ -47,8 +49,15 @@ namespace citycar.Controllers
         }
 
         // GET: Voitures/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
+            Proprietaire proprietaire = null;
+            if (id != null)
+            {
+                 proprietaire = _context.Proprietaire.Where(x => x.Id == id).FirstOrDefault();
+                if (proprietaire != null) 
+                    ViewData["Proprietaire"] = proprietaire;
+            }
             return View();
         }
 
@@ -57,10 +66,38 @@ namespace citycar.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Marque,Modele,Cylindree,Prix,Image")] Voiture voiture)
+        public async Task<IActionResult> Create([Bind("Id,Marque,Modele,Cylindree,Prix,Image")] Voiture voiture, Categories categories, Proprietaire proprietaire)
         {
             if (ModelState.IsValid)
             {
+                //recupere l'image passer dans le formulaire
+                var file = Request.Form.Files[0];
+                if (file.Length > 0)
+                {
+                    var filePath = @"wwwroot/img/" + file.FileName;
+                    using var stream = System.IO.File.Create(filePath);
+                    await file.CopyToAsync(stream);
+                }
+                
+                //Recupere tous les proprietes de la voiture avant l'insertion
+                voiture.Image = file.FileName;
+                voiture.Categorie = _context.Categories.FirstOrDefault(x => x.NomCategories == categories.NomCategories);
+                if(_context.Proprietaire.Any(x => x.Id == proprietaire.Id))
+                {
+                    voiture.Proprietaire =  _context.Proprietaire.FirstOrDefault(x => x.Id == proprietaire.Id);
+
+                }
+                else
+                {
+                     _context.Proprietaire.Add(proprietaire);
+                    await _context.SaveChangesAsync();
+                    voiture.Proprietaire =  _context.Proprietaire.LastOrDefault();
+                }
+                // id autoincrement !
+                voiture.Id = 0;
+                
+
+
                 _context.Add(voiture);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -76,7 +113,11 @@ namespace citycar.Controllers
                 return NotFound();
             }
 
-            var voiture = await _context.Voitures.FindAsync(id);
+            var voiture = await _context.Voitures
+                .Include(x => x.Proprietaire)
+                .Include(x => x.Categorie)
+                .Include(x => x.Commentaires)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (voiture == null)
             {
                 return NotFound();
@@ -89,8 +130,9 @@ namespace citycar.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Marque,Modele,Cylindree,Prix,Image")] Voiture voiture)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Marque,Modele,Cylindree,Prix,Image")] Voiture voiture, String FisrtNameImage, String CategorieId, String ProprietaireId)
         {
+            
             if (id != voiture.Id)
             {
                 return NotFound();
@@ -98,6 +140,38 @@ namespace citycar.Controllers
 
             if (ModelState.IsValid)
             {
+                //Si on a un nouveau fichier on supprimer l'ancien du serveur
+                if(Request.Form.Files.Count > 0)
+                {
+                    var aFilePath = @"wwwroot/img/" + FisrtNameImage;
+                    try
+                    {
+                        System.IO.File.Delete(aFilePath);
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+
+
+                }
+
+                //recupere l'image passer dans le formulaire
+                var file = Request.Form.Files[0];
+                if (file.Length > 0)
+                {
+                    var filePath = @"wwwroot/img/" + file.FileName;
+                    using var stream = System.IO.File.Create(filePath);
+                    await file.CopyToAsync(stream);
+                }
+                //Recupere tous les proprietes de la voiture avant l'insertion
+                voiture.Image = file.FileName;
+                voiture.Proprietaire = await _context.Proprietaire.Where(x => x.Id == int.Parse(ProprietaireId)).FirstAsync();
+                voiture.Categorie = await _context.Categories.Where(x => x.Id == int.Parse(CategorieId)).FirstAsync();                 
+
+
+
                 try
                 {
                     _context.Update(voiture);

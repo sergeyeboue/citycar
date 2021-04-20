@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<citycar.Models.Voiture>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 @{ViewData["Title"] = "Home Page"; }
 <div class="text-center">
 
@@ -7,9 +10,9 @@
     @*Block de recherche*@
     <form asp-action="Index">
         <label for="Marque-select">Marque :</label>
-        <select name="marque" id="Marque-select" >
+        <select name="marque" id="Marque-select">
             <option value="">--Veuillez choisir une option--</option>
-            <option value="BMW" >BMW</option>
+            <option value="BMW">BMW</option>
             <option value="Mercedes">MERCEDES</option>
         </select>
         <label for="Categorie-select">Catégorie :</label>
@@ -18,8 +21,8 @@
             <option value="Berline">Berline</option>
             <option value="SUV">SUV</option>
         </select>
-            <input type="submit" value="Recherche" class="btn btn-primary p-0 mb-1" style="height:30px"/>
-    </form>   
+        <input type="submit" value="Recherche" class="btn btn-primary p-0 mb-1" style="height:30px" />
+    </form>
 
     @*block des voitures*@
     <div class="d-inline-block m-4">
@@ -27,39 +30,50 @@
         @foreach (var item in Model)
         {
 
-<div class="d-inline-block border m-3 p-5" style="height: auto; width:350px;">
+            <div class="d-inline-block border m-3 p-5" style="height: auto; width:350px;">
 
-    <div class="container mt-2">
-        <p>propriétaire : <a asp-controller="Proprietaires" asp-action="Details" asp-route-id="@item.Proprietaire.Id">@item.Proprietaire.NomComplet</a></p>
-    </div>
+                <div class="container mt-2">
+                    <p>propriétaire : <a asp-controller="Proprietaires" asp-action="Details" asp-route-id="@item.Proprietaire.Id">@item.Proprietaire.NomComplet</a></p>
+                </div>
 
-    <div class="container">
-        <p>
-            @item.Marque - @item.Modele - @item.Categorie.NomCategories
-            <br />
-            <a asp-controller="Voitures" asp-action="Details" asp-route-id="@item.Id"><img src="~/img/@item.Image" alt=" " class="img-thumbnail" style="max-width:300px; max-height:100px" /></a>
-        </p>
+                <div class="container">
+                    <p>
+                        @item.Marque - @item.Modele - @item.Categorie.NomCategories
+                        <br />
+                        <a asp-controller="Voitures" asp-action="Details" asp-route-id="@item.Id"><img src="~/img/@item.Image" alt=" " class="img-thumbnail" style="max-width:300px; max-height:100px" /></a>
+                    </p>
 
-    </div>
-
-
-    <div class="container">
-        <p>
-            Dernier commentaire :
-            <ul class="list-unstyled">
-                @{
-                    var num = item.Commentaires.Count;
-                    var commentaire = item.Commentaires.ElementAt(num - 1);
-                    <li style="max-width:200px; font-size:10px"> @commentaire.Date :  @commentaire.TextCommentaire</li>
-
-                }
+                </div>
 
 
-            </ul>
-            <a asp-controller="Voitures" asp-action="Details" asp-route-id="@item.Id">ajouter un commentaire</a>
-        </p>
-    </div>
-</div>}
+                <div class="container">
+                    <p>
+                        Dernier commentaire :
+                        <ul class="list-unstyled">
+                            @{
+                                if (item.Commentaires.Count > 0)
+                                {
+                                    var num = item.Commentaires.Count;
+
+                                    var commentaire = item.Commentaires.ElementAt(num - 1);
+                                    <li style="max-width:200px; font-size:10px"> @commentaire.Date :  @commentaire.TextCommentaire</li>
+                                }
+                                else
+                                {
+                                    <li style="max-width:200px; font-size:10px">Aucun commentaire !</li>
+                                }
+                            }
+
+
+                        </ul>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <a asp-controller="Voitures" asp-action="Details" asp-route-id="@item.Id">ajouter un commentaire</a>
+                        }
+                            
+                    </p>
+                </div>
+            </div>}
 
     </div>
 

@@ -10,7 +10,10 @@
 <h1>Index</h1>
 <h1>Voiture</h1>
 <p>
-    <a asp-action="Create">Create New</a>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a asp-action="Create">Create New</a>
+    }
 </p>
 <table class="table">
     <thead>
@@ -22,6 +25,9 @@
                 @Html.DisplayNameFor(model => model.Modele)
             </th>
             <th>
+                Catégorie
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Cylindree)
             </th>
             <th>
@@ -29,6 +35,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                Propriétaire
             </th>
             <th></th>
         </tr>
@@ -45,13 +54,19 @@
                     @Html.DisplayFor(modelItem => item.Modele)
                 </td>
                 <td>
+                    @item.Categorie.NomCategories
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Cylindree)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Prix)
+                    @Html.DisplayFor(modelItem => item.Prix) $
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Image)
+                    <img src="~/img/@item.Image" alt="@item.Modele" class="img-thumbnail" style="max-width:100px; max-height:100px" title="@item.Marque - @item.Modele"/>
+                </td>
+                <td>
+                    <a asp-controller="Proprietaires" asp-action="Details" asp-route-id="@item.Proprietaire.Id">@item.Proprietaire.NomComplet</a>
                 </td>
                 <td>
                     @if (SignInManager.IsSignedIn(User))
@@ -69,4 +84,6 @@
             </tr>
         }
     </tbody>
+
+    <th></th>
 </table>
