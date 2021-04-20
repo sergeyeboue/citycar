@@ -15,22 +15,22 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Marque" class="control-label"></label>
-                <input asp-for="Marque" class="form-control" />
+                <input asp-for="Marque" class="form-control"  required/>
                 <span asp-validation-for="Marque" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Modele" class="control-label"></label>
-                <input asp-for="Modele" class="form-control" />
+                <input asp-for="Modele" class="form-control" required/>
                 <span asp-validation-for="Modele" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Cylindree" class="control-label"></label>
-                <input asp-for="Cylindree" class="form-control" />
+                <input asp-for="Cylindree" class="form-control" min="0" required/>
                 <span asp-validation-for="Cylindree" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Prix" class="control-label"></label>
-                <input asp-for="Prix" class="form-control" />
+                <input asp-for="Prix" class="form-control" min="0" required/>
                 <span asp-validation-for="Prix" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -40,9 +40,9 @@
             </div>
             <div class="form-group">
                 <label for="Categorie-select" class="control-label">Catégorie :</label>
-                <select name="NomCategories" id="Categorie-select" class="form-control">
+                <select name="NomCategories" id="Categorie-select" class="form-control" required>
                     <option value="">--Veuillez choisir une option--</option>
-                    <option value="Berline">Berline</option>
+                    <option value="Berline" selected>Berline</option>
                     <option value="SUV">SUV</option>
                 </select>
             </div>
@@ -62,11 +62,11 @@
             {
                 <div class="form-group">
                     <label for="Nom" class="control-label">Nom propriétaire</label>
-                    <input name="Nom" class="form-control" id="Nom" />
+                    <input name="Nom" class="form-control" id="Nom" required/>
                 </div>
                 <div class="form-group">
                     <label for="Prenom" class="control-label">Prenom propriétaire</label>
-                    <input name="Prenom" class="form-control" id="Prenom" />
+                    <input name="Prenom" class="form-control" id="Prenom" required/>
                 </div>
             }
 

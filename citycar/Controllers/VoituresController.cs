@@ -71,27 +71,28 @@ namespace citycar.Controllers
             if (ModelState.IsValid)
             {
                 //recupere l'image passer dans le formulaire
-                var file = Request.Form.Files[0];
-                if (file.Length > 0)
+                
+                if(Request.Form.Files.Count > 0)
                 {
+                    var file = Request.Form.Files[0];
                     var filePath = @"wwwroot/img/" + file.FileName;
                     using var stream = System.IO.File.Create(filePath);
                     await file.CopyToAsync(stream);
+                    voiture.Image = file.FileName;
                 }
                 
-                //Recupere tous les proprietes de la voiture avant l'insertion
-                voiture.Image = file.FileName;
+                //Recupere tous les proprietes de la voiture avant l'insertion                
                 voiture.Categorie = _context.Categories.FirstOrDefault(x => x.NomCategories == categories.NomCategories);
                 if(_context.Proprietaire.Any(x => x.Id == proprietaire.Id))
                 {
                     voiture.Proprietaire =  _context.Proprietaire.FirstOrDefault(x => x.Id == proprietaire.Id);
 
                 }
-                else
+                if(proprietaire.Id == 0)
                 {
                      _context.Proprietaire.Add(proprietaire);
                     await _context.SaveChangesAsync();
-                    voiture.Proprietaire =  _context.Proprietaire.LastOrDefault();
+                    voiture.Proprietaire =  await _context.Proprietaire.OrderByDescending(x => x.Id).FirstAsync();
                 }
                 // id autoincrement !
                 voiture.Id = 0;
@@ -143,30 +144,35 @@ namespace citycar.Controllers
                 //Si on a un nouveau fichier on supprimer l'ancien du serveur
                 if(Request.Form.Files.Count > 0)
                 {
-                    var aFilePath = @"wwwroot/img/" + FisrtNameImage;
-                    try
+                    
+                    if(FisrtNameImage != null)
                     {
-                        System.IO.File.Delete(aFilePath);
+                        var aFilePath = @"wwwroot/img/" + FisrtNameImage;
+                        try
+                        {
+                            System.IO.File.Delete(aFilePath);
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
                     }
-                    catch (Exception)
+                    
+                    //recupere l'image passer dans le formulaire
+                    var file = Request.Form.Files[0];
+                    if (file.Length > 0)
                     {
-
-                        throw;
+                        var filePath = @"wwwroot/img/" + file.FileName;
+                        using var stream = System.IO.File.Create(filePath);
+                        await file.CopyToAsync(stream);
                     }
-
-
+                    voiture.Image = file.FileName;
                 }
+                else { voiture.Image = FisrtNameImage; }
 
-                //recupere l'image passer dans le formulaire
-                var file = Request.Form.Files[0];
-                if (file.Length > 0)
-                {
-                    var filePath = @"wwwroot/img/" + file.FileName;
-                    using var stream = System.IO.File.Create(filePath);
-                    await file.CopyToAsync(stream);
-                }
-                //Recupere tous les proprietes de la voiture avant l'insertion
-                voiture.Image = file.FileName;
+                
+                //Recupere tous les proprietes de la voiture avant l'insertion                
                 voiture.Proprietaire = await _context.Proprietaire.Where(x => x.Id == int.Parse(ProprietaireId)).FirstAsync();
                 voiture.Categorie = await _context.Categories.Where(x => x.Id == int.Parse(CategorieId)).FirstAsync();                 
 
@@ -216,6 +222,19 @@ namespace citycar.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            //suppresion des commentaire de la voiture  
+            var listCommentaire = await _context.Commentaire.Where(x => x.Voiture.Id == id).ToListAsync();
+            if(listCommentaire != null)
+            {
+                foreach (var c in listCommentaire)
+                {
+                    _context.Commentaire.Remove(c);
+
+                }
+                await _context.SaveChangesAsync();
+            }            
+            
+
             var voiture = await _context.Voitures.FindAsync(id);
             _context.Voitures.Remove(voiture);
             await _context.SaveChangesAsync();

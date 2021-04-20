@@ -140,6 +140,34 @@ namespace citycar.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            //suppression en cascade !!
+
+            //On va recuperer la list de ses voitures.
+            var listVoiture = await _context.Voitures.Where(x => x.Proprietaire.Id == id).ToListAsync();
+
+            //Supprimer les commentaires de ses voitures et les voitures
+            if (listVoiture != null)
+            {
+                foreach (var v in listVoiture)
+                {
+                    var listCommentaire = await _context.Commentaire.Where(x => x.Voiture.Id == v.Id).ToListAsync();
+                    if(listCommentaire != null)
+                    {
+                        foreach (var c in listCommentaire)
+                        {
+                            _context.Commentaire.Remove(c);                            
+                        }
+                        await _context.SaveChangesAsync();
+                    }
+                    _context.Voitures.Remove(v);
+
+                }
+
+                await _context.SaveChangesAsync();
+            }
+
+            //Supprime le proprietaire !
+
             var proprietaire = await _context.Proprietaire.FindAsync(id);
             _context.Proprietaire.Remove(proprietaire);
             await _context.SaveChangesAsync();
