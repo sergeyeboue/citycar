@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-
+    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
 @{
     ViewData["Title"] = "Details";
 }
@@ -59,18 +59,27 @@
         <td class="w-50">
             @foreach (var c in Model.Commentaires)
             {
+
                 <span class="float-left">@c.Date - @c.TextCommentaire</span><br />
             }
             @if (SignInManager.IsSignedIn(User))
             {
-                <form asp-controller="Commentaires" asp-action="Create">
-                    <textarea name="TextCommentaire" rows="5" cols="50"></textarea>
-                    <input type="hidden" name="Date" value="@DateTime.Now" />
-                    <input type="hidden" name="Id" value="@Model.Id" />
-                    <input type="hidden" name="Marque" value="@Model.Marque" />
-                    <input type="hidden" name="Modele" value="@Model.Modele" />
-                    <input type="submit" class="btn btn-primary" value="Ajouter un commentaire" />
-                </form>
+        <form asp-controller="Commentaires" asp-action="Create">
+            <textarea style="width:100px" id="editor" name="TextCommentaire" rows="5" cols="50"></textarea>
+            <script>
+                ClassicEditor
+                    .create(document.querySelector('#editor'))
+                    .catch(error => {
+                        console.error(error);
+                    });
+            </script>
+
+            <input type="hidden" name="Date" value="@DateTime.Now" />
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <input type="hidden" name="Marque" value="@Model.Marque" />
+            <input type="hidden" name="Modele" value="@Model.Modele" />
+            <input type="submit" class="btn btn-primary" value="Ajouter un commentaire" />
+        </form>
 
             }
         </td>

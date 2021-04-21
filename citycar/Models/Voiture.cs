@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace citycar.Models
 {
@@ -45,4 +46,5 @@ namespace citycar.Models
         public DateTime Date { get; set; }
         public Voiture Voiture { get; set; }
     }
+
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using citycar.Data;
 using citycar.Models;
+using System.Text.RegularExpressions;
 
 namespace citycar.Controllers
 {
@@ -26,6 +27,8 @@ namespace citycar.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TextCommentaire,Date")] Commentaire commentaire, Voiture voiture)
         {
+            commentaire.TextCommentaire = StripHTML(commentaire.TextCommentaire);
+            
             commentaire.Voiture = _context.Voitures.FirstOrDefault(m => m.Id == voiture.Id);
             commentaire.Id = 0;
             
@@ -54,5 +57,10 @@ namespace citycar.Controllers
         {
             return _context.Commentaire.Any(e => e.Id == id);
         }
+        public static string StripHTML(string input)
+        {
+            return Regex.Replace(input, "<.*?>", String.Empty);
+        }
+
     }
 }
