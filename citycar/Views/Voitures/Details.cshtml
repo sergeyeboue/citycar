@@ -57,16 +57,16 @@
             </td>
 
             @*Ajouter commentaire*@
-            <td class="w-100" style="display:flex;flex-direction: column">
+            <td class="w-100 h-auto" style="display:flex;flex-direction: column">
                 @foreach (var c in Model.Commentaires)
                 {
 
-                    <span class="float-left">@c.Date - @Html.Raw(@c.TextCommentaire)</span><br />
+                    <span class="float-left">@c.Date - @Html.Raw(@c.TextCommentaire)</span>
                 }
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <form asp-controller="Commentaires" asp-action="Create">
-                        <textarea style="width:100px" id="editor" name="TextCommentaire" rows="5" cols="50"></textarea>
+                        <textarea id="editor" name="TextCommentaire" rows="5" cols="50"></textarea>
                         <script>
                             CKEDITOR.replace(
                                 'editor');
