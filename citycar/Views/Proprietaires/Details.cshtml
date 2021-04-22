@@ -4,7 +4,7 @@
 @inject UserManager<IdentityUser> UserManager
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Details Propriétaire";
 }
 
 <h1>Details</h1>
@@ -112,7 +112,11 @@
             }
 
             <a asp-action="Index">Back to List</a>
-        </div>
+        </div>      
+    }
+    else
+    {
+        <p style="color: red">@ViewData["exceptionProprietaireId"]</p>
     }
 }
 

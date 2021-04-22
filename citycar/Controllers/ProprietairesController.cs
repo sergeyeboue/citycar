@@ -30,7 +30,7 @@ namespace citycar.Controllers
         {
             if (id == null)
             {
-                ViewData["exceptionProprietaireId"] = "Cet Id n'existe pas" + id;
+                ViewData["exceptionProprietaireId"] = "Impossible de traiter cette demande !!!";
                 return View();
             }
 
@@ -39,7 +39,7 @@ namespace citycar.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (proprietaire == null)
             {
-                ViewData["exceptionProprietaireId"] = "Ce proprietaire n'existe pas" + id;
+                ViewData["exceptionProprietaireId"] = "Impossible de traiter cette demande !!!";
                 return View();
             }
 
@@ -73,7 +73,7 @@ namespace citycar.Controllers
         {
             if (id == null)
             {
-                ViewData["exceptionProprietaireId"] = "Cet Id n'existe pas" + id;
+                ViewData["exceptionProprietaireId"] = "Impossible de traiter cette demande !!!";
                 return View();
 
             }
@@ -82,7 +82,7 @@ namespace citycar.Controllers
             if (proprietaire == null)
             {
 
-                ViewData["exceptionProprietaireId"] = "Impossible de trouver cet Id " + id;
+                ViewData["exceptionProprietaireId"] = "Impossible de traiter cette demande !!!";
                 return View(proprietaire);
 
             }
@@ -136,7 +136,7 @@ namespace citycar.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (proprietaire == null)
             {
-                ViewData["exceptionProprietaireId"] = "Impossible de trouver cet Id " + id;
+                ViewData["exceptionProprietaireId"] = "Impossible de traiter cette demande !!!";
                 return View(proprietaire);
 
             }

@@ -33,7 +33,8 @@ namespace citycar.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                ViewData["exceptionVoitureId"] = "Impossible de traiter cette demande !!!";
+                return View();
             }
 
             var voiture = await _context.Voitures
@@ -43,7 +44,8 @@ namespace citycar.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (voiture == null)
             {
-                return NotFound();
+                ViewData["exceptionVoitureId"] = "Cet id " + (id) + " n'existe pas ";
+                return View();
             }
 
             return View(voiture);
@@ -112,7 +114,7 @@ namespace citycar.Controllers
         {
             if (id == null)
             {
-                ViewData["exceptionVoitureId"] = " Cet Id n'existe pas " + id;
+                ViewData["exceptionVoitureId"] = "Impossible de traiter cette demande !!!";
                 return View();
             }
 
@@ -207,7 +209,8 @@ namespace citycar.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                ViewData["exceptionVoitureId"] = "Impossible de traiter cette demande !!!";
+                return View();
             }
 
             var voiture = await _context.Voitures
