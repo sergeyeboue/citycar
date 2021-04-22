@@ -52,12 +52,20 @@ button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
 }
+.display-4 {
+    text-shadow: 2px 2px #6495ED;
+    margin-bottom: 1em;
+}
+.col-md-4 {
+    border: solid 1px #1f1f1f;
+    border-radius: 10px 5px 10px 5px;
+}
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
@@ -71,6 +79,10 @@ body {
 }
 main{
     flex:1
+}
+
+.space{
+    margin-right: 20px;
 }
 
 .footer {

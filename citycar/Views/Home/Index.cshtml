@@ -5,24 +5,24 @@
 @{ViewData["Title"] = "Home Page"; }
 <div class="text-center">
 
-    <h1 class="display-4">CITYCAR</h1>
+    <h1 id=" titre" class="display-4">CITYCAR</h1>
 
     @*Block de recherche*@
     <form  asp-action="Index">
-        <label for="Marque-select">Marque :</label>
-        <select name="marque" id="Marque-select">
-            <option value="">--Veuillez choisir une option--</option>
+        <label for="Marque-select" >Marques :</label>
+        <select name="marque" id="Marque-select" style="height:40px; width:215px" class="space">
+            <option value="">Veuillez choisir une option</option>
             <option value="BMW">BMW</option>
             <option value="Mercedes">MERCEDES</option>
         </select>
         <span></span>
-        <label for="Categorie-select">Catégorie :</label>
-        <select name="NomCategories" id="Categorie-select">
-            <option value="">--Veuillez choisir une option--</option>
+        <label for="Categorie-select" >Catégories :</label>
+        <select name="NomCategories" id="Categorie-select" style="height:40px; width:215px" class="space">
+            <option value="">Veuillez choisir une option</option>
             <option value="Berline">Berline</option>
             <option value="SUV">SUV</option>
         </select>
-        <input type="submit" value="Recherche" class="btn btn-primary p-0 mb-1" style="height:30px" />
+        <input type="submit" value="Rechercher" class="btn btn-primary p-0 mb-1" style="height:40px; width:150px" />
     </form>
 
     @*block des voitures*@
