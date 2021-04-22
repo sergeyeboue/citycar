@@ -6,6 +6,15 @@
 
 <h1>Edit</h1>
 
+@{
+    if ((ViewData["exceptionProprietaireId"]) != null)
+    {
+        <p>@ViewData["exceptionProprietaireId"]  </p>
+
+    }
+}
+
+
 <h4>Proprietaire</h4>
 <hr />
 <div class="row">
@@ -15,12 +24,12 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Nom" class="control-label"></label>
-                <input asp-for="Nom" class="form-control" required/>
+                <input asp-for="Nom" class="form-control" required />
                 <span asp-validation-for="Nom" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Prenom" class="control-label"></label>
-                <input asp-for="Prenom" class="form-control" required/>
+                <input asp-for="Prenom" class="form-control" required />
                 <span asp-validation-for="Prenom" class="text-danger"></span>
             </div>
             <div class="form-group">

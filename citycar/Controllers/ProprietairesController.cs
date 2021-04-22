@@ -77,7 +77,10 @@ namespace citycar.Controllers
             var proprietaire = await _context.Proprietaire.FindAsync(id);
             if (proprietaire == null)
             {
-                return NotFound();
+
+                ViewData["exceptionProprietaireId"] = "Impossible de trouver cet Id " + id;
+                return View(proprietaire);
+
             }
             return View(proprietaire);
         }
@@ -129,7 +132,9 @@ namespace citycar.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (proprietaire == null)
             {
-                return NotFound();
+                ViewData["exceptionProprietaireId"] = "Impossible de trouver cet Id " + id;
+                return View(proprietaire);
+
             }
 
             return View(proprietaire);
@@ -167,11 +172,22 @@ namespace citycar.Controllers
             }
 
             //Supprime le proprietaire !
+            if (ProprietaireExists(id))
+            {
+                var proprietaire = await _context.Proprietaire.FindAsync(id);
+                _context.Proprietaire.Remove(proprietaire);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
 
-            var proprietaire = await _context.Proprietaire.FindAsync(id);
-            _context.Proprietaire.Remove(proprietaire);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            }
+
+            else
+            {
+                ViewData["exceptionProprietaireId"] = " Ce proprietaire n'existe pas";
+                return View();
+            }
+
+
         }
 
         private bool ProprietaireExists(int id)
