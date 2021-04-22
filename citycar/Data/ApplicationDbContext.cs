@@ -157,6 +157,62 @@ namespace citycar.Data
                         NomCategories = "SUV"
                     }
                     );
+            modelBuilder.Entity<Categories>()
+                .HasData(
+                    new
+                    {
+                        Id = 3,
+                        NomCategories = "Roadster"
+                    }
+                    );
+            modelBuilder.Entity<Categories>()
+                .HasData(
+                    new
+                    {
+                        Id = 4,
+                        NomCategories = "Cabriolet"
+                    }
+                    );
+            modelBuilder.Entity<Categories>()
+                .HasData(
+                    new
+                    {
+                        Id = 5,
+                        NomCategories = "Familiale"
+                    }
+                    );
+            modelBuilder.Entity<Categories>()
+                .HasData(
+                    new
+                    {
+                        Id = 6,
+                        NomCategories = "Coupé"
+                    }
+                    );
+            modelBuilder.Entity<Categories>()
+                .HasData(
+                    new
+                    {
+                        Id = 7,
+                        NomCategories = "Pickup"
+                    }
+                    );
+            modelBuilder.Entity<Categories>()
+                .HasData(
+                    new
+                    {
+                        Id = 8,
+                        NomCategories = "voiture sportive"
+                    }
+                    );
+            modelBuilder.Entity<Categories>()
+                .HasData(
+                    new
+                    {
+                        Id = 9,
+                        NomCategories = "4×4"
+                    }
+                    );
             #endregion
 
             #region seeCommentaire
