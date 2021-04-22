@@ -56,7 +56,7 @@
                                     var num = item.Commentaires.Count;
 
                                     var commentaire = item.Commentaires.ElementAt(num - 1);
-                                    <li style="max-width:200px; font-size:10px"> @commentaire.Date :  @commentaire.TextCommentaire</li>
+                                    <li style="max-width:200px; font-size:10px"> @commentaire.Date :  @Html.Raw(@commentaire.TextCommentaire)</li>
                                 }
                                 else
                                 {
