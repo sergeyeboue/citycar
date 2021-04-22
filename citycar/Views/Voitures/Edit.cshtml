@@ -6,45 +6,66 @@
 <script src="~/js/image.js"></script>
 <h1>Edit</h1>
 
+
 <h4>Voiture</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit" enctype="multipart/form-data" name="form">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Marque" class="control-label"></label>
-                <input asp-for="Marque" class="form-control" required/>
-                <span asp-validation-for="Marque" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Modele" class="control-label"></label>
-                <input asp-for="Modele" class="form-control" required/>
-                <span asp-validation-for="Modele" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cylindree" class="control-label"></label>
-                <input asp-for="Cylindree" class="form-control" min="0" required/>
-                <span asp-validation-for="Cylindree" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Prix" class="control-label"></label>
-                <input asp-for="Prix" class="form-control" min="0" required/>
-                <span asp-validation-for="Prix" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" type="file" class="form-control"  name="file"/>
-                <input type="hidden" name="FisrtNameImage" value="@Model.Image" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
-            </div>
-            <input type="hidden" name="CategorieId" value="@Model.Categorie.Id" />
-            <input type="hidden" name="ProprietaireId" value="@Model.Proprietaire.Id"/>
-            <div class="form-group">
-                <input type="submit" onclick="return validate();" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+
+        @{
+            if (Model != null)
+            {
+
+                <form asp-action="Edit" enctype="multipart/form-data" name="form">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="Marque" class="control-label"></label>
+                        <input asp-for="Marque" class="form-control" required />
+                        <span asp-validation-for="Marque" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Modele" class="control-label"></label>
+                        <input asp-for="Modele" class="form-control" required />
+                        <span asp-validation-for="Modele" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cylindree" class="control-label"></label>
+                        <input asp-for="Cylindree" class="form-control" min="0" required />
+                        <span asp-validation-for="Cylindree" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Prix" class="control-label"></label>
+                        <input asp-for="Prix" class="form-control" min="0" required />
+                        <span asp-validation-for="Prix" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Image" class="control-label"></label>
+                        <input asp-for="Image" type="file" class="form-control" name="file" />
+                        <input type="hidden" name="FisrtNameImage" value="@Model.Image" class="form-control" />
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                    <input type="hidden" name="CategorieId" value="@Model.Categorie.Id" />
+                    <input type="hidden" name="ProprietaireId" value="@Model.Proprietaire.Id" />
+                    <div class="form-group">
+                        <input type="submit" onclick="return validate();" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            }
+            else
+            {              
+                    if ((ViewData["exceptionVoitureId"]) != null)
+                    {
+                        <p>@ViewData["exceptionVoitureId"]  </p>
+
+                    }
+                }
+
+
+            
+        }
+
+
     </div>
 </div>
 

@@ -122,7 +122,8 @@ namespace citycar.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (voiture == null)
             {
-                return NotFound();
+                ViewData["exceptionVoitureId"] = "Impossible de trouver cet Id " + id;
+                return View();
             }
             return View(voiture);
         }
@@ -212,7 +213,9 @@ namespace citycar.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (voiture == null)
             {
-                return NotFound();
+                ViewData["exceptionVoitureId"] = "Impossible de trouver cet Id " + id;
+                return View(voiture);
+
             }
 
             return View(voiture);
@@ -233,13 +236,24 @@ namespace citycar.Controllers
 
                 }
                 await _context.SaveChangesAsync();
-            }            
-            
+            }
 
-            var voiture = await _context.Voitures.FindAsync(id);
-            _context.Voitures.Remove(voiture);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            if (VoitureExists(id))
+            {
+                var voiture = await _context.Voitures.FindAsync(id);
+                _context.Voitures.Remove(voiture);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                ViewData["exceptionVoitureId"] = " Cette voiture n'existe pas";
+                return View();
+            }
+
+
+
         }
 
         private bool VoitureExists(int id)
