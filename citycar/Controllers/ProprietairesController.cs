@@ -30,7 +30,8 @@ namespace citycar.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                ViewData["exceptionProprietaireId"] = "Cet Id n'existe pas" + id;
+                return View();
             }
 
             var proprietaire = await _context.Proprietaire
@@ -38,7 +39,8 @@ namespace citycar.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (proprietaire == null)
             {
-                return NotFound();
+                ViewData["exceptionProprietaireId"] = "Ce proprietaire n'existe pas" + id;
+                return View();
             }
 
             return View(proprietaire);
@@ -71,7 +73,9 @@ namespace citycar.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                ViewData["exceptionProprietaireId"] = "Cet Id n'existe pas" + id;
+                return View();
+
             }
 
             var proprietaire = await _context.Proprietaire.FindAsync(id);

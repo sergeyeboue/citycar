@@ -10,79 +10,96 @@
 
 <h1>Details</h1>
 
+
 <div>
     <h4>Voiture</h4>
-    <table class="table">
-        <tr>
-            <td>
-                <img src="~/img/@Model.Image" alt="@Model.Image" class="img-thumbnail w-75 h-auto" />
-                <dl class="row">
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Marque)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Marque)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Modele)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Modele)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Cylindree)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Cylindree)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Prix)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Prix)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Categorie)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Categorie.NomCategories)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Proprietaire)
-                    </dt>
-                    <dd class="col-sm-10">
-                        <a asp-controller="Proprietaires" asp-action="Details" asp-route-id="@Model.Proprietaire.Id">@Model.Proprietaire.NomComplet</a>
-                    </dd>
-                </dl>
-            </td>
 
-            @*Ajouter commentaire*@
-            <td class="w-100 h-auto" style="display:flex;flex-direction: column">
-                @foreach (var c in Model.Commentaires)
-                {
+    @{
+        if (Model != null)
+        {
+            <table class="table">
+                <tr>
+                    <td>
+                        <img src="~/img/@Model.Image" alt="@Model.Image" class="img-thumbnail w-75 h-auto" />
+                        <dl class="row">
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.Marque)
+                            </dt>
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Marque)
+                            </dd>
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.Modele)
+                            </dt>
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Modele)
+                            </dd>
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.Cylindree)
+                            </dt>
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Cylindree)
+                            </dd>
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.Prix)
+                            </dt>
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Prix)
+                            </dd>
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.Categorie)
+                            </dt>
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Categorie.NomCategories)
+                            </dd>
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.Proprietaire)
+                            </dt>
+                            <dd class="col-sm-10">
+                                <a asp-controller="Proprietaires" asp-action="Details" asp-route-id="@Model.Proprietaire.Id">@Model.Proprietaire.NomComplet</a>
+                            </dd>
+                        </dl>
+                    </td>
 
-                    <span class="float-left">@c.Date - @Html.Raw(@c.TextCommentaire)</span>
-                }
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <form asp-controller="Commentaires" asp-action="Create">
-                        <textarea id="editor" name="TextCommentaire" rows="5" cols="50"></textarea>
-                        <script>
-                            CKEDITOR.replace(
-                                'editor');
-                        </script>
 
-                        <input type="hidden" name="Date" value="@DateTime.Now" />
-                        <input type="hidden" name="Id" value="@Model.Id" />
-                        <input type="hidden" name="Marque" value="@Model.Marque" />
-                        <input type="hidden" name="Modele" value="@Model.Modele" />
-                        <input style="margin-top:1em" type="submit" class="btn btn-primary" value="Ajouter un commentaire" />
-                    </form>
+                    @*Ajouter commentaire*@
+                    <td class="w-100 h-auto" style="display:flex;flex-direction: column">
+                        @foreach (var c in Model.Commentaires)
+                        {
 
-                }
-            </td>
-        </tr>
-    </table>
+                            <span class="float-left">@c.Date - @Html.Raw(@c.TextCommentaire)</span>
+                        }
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <form asp-controller="Commentaires" asp-action="Create">
+                                <textarea id="editor" name="TextCommentaire" rows="5" cols="50"></textarea>
+                                <script>
+                                    CKEDITOR.replace(
+                                        'editor');
+                                </script>
+
+                                <input type="hidden" name="Date" value="@DateTime.Now" />
+                                <input type="hidden" name="Id" value="@Model.Id" />
+                                <input type="hidden" name="Marque" value="@Model.Marque" />
+                                <input type="hidden" name="Modele" value="@Model.Modele" />
+                                <input style="margin-top:1em" type="submit" class="btn btn-primary" value="Ajouter un commentaire" />
+                            </form>
+
+                        }
+                    </td>
+                </tr>
+            </table>
+
+        }
+        else
+        {
+            if ((ViewData["exceptionVoitureId"]) != null)
+            {
+                <p>@ViewData["exceptionVoitureId"]  </p>
+
+            }
+        }
+    }
     <hr />
 
 </div>

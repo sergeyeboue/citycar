@@ -112,7 +112,8 @@ namespace citycar.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                ViewData["exceptionVoitureId"] = " Cet Id n'existe pas " + id;
+                return View();
             }
 
             var voiture = await _context.Voitures
