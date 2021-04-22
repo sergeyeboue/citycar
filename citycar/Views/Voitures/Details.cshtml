@@ -2,14 +2,15 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+<script src="~/ckeditor/ckeditor.js"></script>
+<link href="~/ckeditor/contents.css" rel="stylesheet" />
 @{
     ViewData["Title"] = "Details";
 }
 
 <h1>Details</h1>
 
-<div >
+<div>
     <h4>Voiture</h4>
     <table class="table">
         <tr>
@@ -56,37 +57,34 @@
             </td>
 
             @*Ajouter commentaire*@
-        <td class="w-50">
-            @foreach (var c in Model.Commentaires)
-            {
+            <td class="w-100" style="display:flex;flex-direction: column">
+                @foreach (var c in Model.Commentaires)
+                {
 
-                <span class="float-left">@c.Date - @c.TextCommentaire</span><br />
-            }
-            @if (SignInManager.IsSignedIn(User))
-            {
-        <form asp-controller="Commentaires" asp-action="Create">
-            <textarea style="width:100px" id="editor" name="TextCommentaire" rows="5" cols="50"></textarea>
-            <script>
-                ClassicEditor
-                    .create(document.querySelector('#editor'))
-                    .catch(error => {
-                        console.error(error);
-                    });
-            </script>
+                    <span class="float-left">@c.Date - @Html.Raw(@c.TextCommentaire)</span><br />
+                }
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <form asp-controller="Commentaires" asp-action="Create">
+                        <textarea style="width:100px" id="editor" name="TextCommentaire" rows="5" cols="50"></textarea>
+                        <script>
+                            CKEDITOR.replace(
+                                'editor');
+                        </script>
 
-            <input type="hidden" name="Date" value="@DateTime.Now" />
-            <input type="hidden" name="Id" value="@Model.Id" />
-            <input type="hidden" name="Marque" value="@Model.Marque" />
-            <input type="hidden" name="Modele" value="@Model.Modele" />
-            <input type="submit" class="btn btn-primary" value="Ajouter un commentaire" />
-        </form>
+                        <input type="hidden" name="Date" value="@DateTime.Now" />
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <input type="hidden" name="Marque" value="@Model.Marque" />
+                        <input type="hidden" name="Modele" value="@Model.Modele" />
+                        <input style="margin-top:1em" type="submit" class="btn btn-primary" value="Ajouter un commentaire" />
+                    </form>
 
-            }
-        </td>
+                }
+            </td>
         </tr>
     </table>
     <hr />
-    
+
 </div>
 <div>
     @if (SignInManager.IsSignedIn(User))
