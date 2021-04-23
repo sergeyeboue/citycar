@@ -3,9 +3,9 @@
 @{
     ViewData["Title"] = "Edit";
 }
-<script src="~/js/image.js"></script>
-<h1>Edit</h1>
 
+<h1>Edit</h1>
+<script src="~/js/Validation.js"></script>
 
 <h4>Voiture</h4>
 <hr />
@@ -48,7 +48,7 @@
                     <input type="hidden" name="CategorieId" value="@Model.Categorie.Id" />
                     <input type="hidden" name="ProprietaireId" value="@Model.Proprietaire.Id" />
                     <div class="form-group">
-                        <input type="submit" onclick="return validate();" value="Save" class="btn btn-primary" />
+                        <input type="submit" onclick="return validatedit() ;" value="Save" class="btn btn-primary" />
                     </div>
                 </form>
             }
