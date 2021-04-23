@@ -241,37 +241,7 @@ namespace citycar.Migrations
                         new
                         {
                             Id = 3,
-                            NomCategories = "Roadster"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            NomCategories = "Cabriolet"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            NomCategories = "Familiale"
-                        },
-                        new
-                        {
-                            Id = 6,
                             NomCategories = "Coupé"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            NomCategories = "Pickup"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            NomCategories = "voiture sportive"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            NomCategories = "4×4"
                         });
                 });
 
@@ -302,42 +272,42 @@ namespace citycar.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 4, 22, 21, 22, 42, 899, DateTimeKind.Local).AddTicks(9553),
+                            Date = new DateTime(2021, 4, 23, 11, 14, 13, 162, DateTimeKind.Local).AddTicks(9194),
                             TextCommentaire = "Premier commentaire",
                             VoitureId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2021, 4, 22, 21, 22, 42, 914, DateTimeKind.Local).AddTicks(695),
+                            Date = new DateTime(2021, 4, 23, 11, 14, 13, 164, DateTimeKind.Local).AddTicks(4947),
                             TextCommentaire = "Un Autre commentaire",
                             VoitureId = 2
                         },
                         new
                         {
                             Id = 3,
-                            Date = new DateTime(2021, 4, 22, 21, 22, 42, 914, DateTimeKind.Local).AddTicks(880),
+                            Date = new DateTime(2021, 4, 23, 11, 14, 13, 164, DateTimeKind.Local).AddTicks(5009),
                             TextCommentaire = "Encore un Autre commentaire",
                             VoitureId = 3
                         },
                         new
                         {
                             Id = 4,
-                            Date = new DateTime(2021, 4, 22, 21, 22, 42, 914, DateTimeKind.Local).AddTicks(926),
+                            Date = new DateTime(2021, 4, 23, 11, 14, 13, 164, DateTimeKind.Local).AddTicks(5031),
                             TextCommentaire = "Encore un Autre commentaire",
                             VoitureId = 4
                         },
                         new
                         {
                             Id = 5,
-                            Date = new DateTime(2021, 4, 22, 21, 22, 42, 914, DateTimeKind.Local).AddTicks(969),
+                            Date = new DateTime(2021, 4, 23, 11, 14, 13, 164, DateTimeKind.Local).AddTicks(5051),
                             TextCommentaire = "Encore un Autre commentaire",
                             VoitureId = 5
                         },
                         new
                         {
                             Id = 6,
-                            Date = new DateTime(2021, 4, 22, 21, 22, 42, 914, DateTimeKind.Local).AddTicks(1022),
+                            Date = new DateTime(2021, 4, 23, 11, 14, 13, 164, DateTimeKind.Local).AddTicks(5081),
                             TextCommentaire = "Encore un Autre commentaire",
                             VoitureId = 6
                         });
@@ -375,6 +345,12 @@ namespace citycar.Migrations
                             Id = 2,
                             Nom = "Dupont",
                             Prenom = "Luc"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Nom = "Richard",
+                            Prenom = "Johns"
                         });
                 });
 
@@ -483,6 +459,17 @@ namespace citycar.Migrations
                             Modele = "720s",
                             Prix = 350000.0,
                             ProprietaireId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategorieId = 3,
+                            Cylindree = 8,
+                            Image = "7.jpg",
+                            Marque = "Ford",
+                            Modele = "720s",
+                            Prix = 26549.0,
+                            ProprietaireId = 3
                         });
                 });
 

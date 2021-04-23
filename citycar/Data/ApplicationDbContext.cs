@@ -131,21 +131,6 @@ namespace citycar.Data
                         CategorieId = 3
                     }
                     );
-            modelBuilder.Entity<Voiture>()
-                .HasData(
-                    new
-                    {
-
-                        Id = 8,
-                        Marque = "Jeep",
-                        Modele = "kjcx8",
-                        Cylindree = 8,
-                        Prix = 30549.00,
-                        Image = "8.jpg",
-                        ProprietaireId = 4,
-                        CategorieId = 4
-                    }
-                    );
             #endregion
 
 
@@ -177,15 +162,6 @@ namespace citycar.Data
                         Prenom = "Johns"
                     }
                     );
-            modelBuilder.Entity<Proprietaire>()
-                .HasData(
-                    new
-                    {
-                        Id = 4,
-                        Nom = "Xavier",
-                        Prenom = "Mensah"
-                    }
-                    );
             #endregion
 
             #region seeCategorie
@@ -210,55 +186,7 @@ namespace citycar.Data
                     new
                     {
                         Id = 3,
-                        NomCategories = "Roadster"
-                    }
-                    );
-            modelBuilder.Entity<Categories>()
-                .HasData(
-                    new
-                    {
-                        Id = 4,
-                        NomCategories = "Cabriolet"
-                    }
-                    );
-            modelBuilder.Entity<Categories>()
-                .HasData(
-                    new
-                    {
-                        Id = 5,
-                        NomCategories = "Familiale"
-                    }
-                    );
-            modelBuilder.Entity<Categories>()
-                .HasData(
-                    new
-                    {
-                        Id = 6,
                         NomCategories = "Coupé"
-                    }
-                    );
-            modelBuilder.Entity<Categories>()
-                .HasData(
-                    new
-                    {
-                        Id = 7,
-                        NomCategories = "Pickup"
-                    }
-                    );
-            modelBuilder.Entity<Categories>()
-                .HasData(
-                    new
-                    {
-                        Id = 8,
-                        NomCategories = "voiture sportive"
-                    }
-                    );
-            modelBuilder.Entity<Categories>()
-                .HasData(
-                    new
-                    {
-                        Id = 9,
-                        NomCategories = "4×4"
                     }
                     );
             #endregion
