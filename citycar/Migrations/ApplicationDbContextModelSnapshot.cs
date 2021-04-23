@@ -219,6 +219,8 @@ namespace citycar.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("NomCategories")
+                        .IsRequired()
+                        .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -235,6 +237,41 @@ namespace citycar.Migrations
                         {
                             Id = 2,
                             NomCategories = "SUV"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            NomCategories = "Roadster"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            NomCategories = "Cabriolet"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            NomCategories = "Familiale"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            NomCategories = "Coupé"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            NomCategories = "Pickup"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            NomCategories = "voiture sportive"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            NomCategories = "4×4"
                         });
                 });
 
@@ -248,6 +285,8 @@ namespace citycar.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("TextCommentaire")
+                        .IsRequired()
+                        .HasMaxLength(500)
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("VoitureId")
@@ -263,42 +302,42 @@ namespace citycar.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 4, 21, 14, 24, 45, 976, DateTimeKind.Local).AddTicks(1190),
+                            Date = new DateTime(2021, 4, 23, 7, 56, 44, 427, DateTimeKind.Local).AddTicks(8608),
                             TextCommentaire = "Premier commentaire",
                             VoitureId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2021, 4, 21, 14, 24, 45, 981, DateTimeKind.Local).AddTicks(9138),
+                            Date = new DateTime(2021, 4, 23, 7, 56, 44, 429, DateTimeKind.Local).AddTicks(4099),
                             TextCommentaire = "Un Autre commentaire",
                             VoitureId = 2
                         },
                         new
                         {
                             Id = 3,
-                            Date = new DateTime(2021, 4, 21, 14, 24, 45, 981, DateTimeKind.Local).AddTicks(9431),
+                            Date = new DateTime(2021, 4, 23, 7, 56, 44, 429, DateTimeKind.Local).AddTicks(4153),
                             TextCommentaire = "Encore un Autre commentaire",
                             VoitureId = 3
                         },
                         new
                         {
                             Id = 4,
-                            Date = new DateTime(2021, 4, 21, 14, 24, 45, 981, DateTimeKind.Local).AddTicks(9480),
+                            Date = new DateTime(2021, 4, 23, 7, 56, 44, 429, DateTimeKind.Local).AddTicks(4174),
                             TextCommentaire = "Encore un Autre commentaire",
                             VoitureId = 4
                         },
                         new
                         {
                             Id = 5,
-                            Date = new DateTime(2021, 4, 21, 14, 24, 45, 981, DateTimeKind.Local).AddTicks(9502),
+                            Date = new DateTime(2021, 4, 23, 7, 56, 44, 429, DateTimeKind.Local).AddTicks(4189),
                             TextCommentaire = "Encore un Autre commentaire",
                             VoitureId = 5
                         },
                         new
                         {
                             Id = 6,
-                            Date = new DateTime(2021, 4, 21, 14, 24, 45, 981, DateTimeKind.Local).AddTicks(9530),
+                            Date = new DateTime(2021, 4, 23, 7, 56, 44, 429, DateTimeKind.Local).AddTicks(4212),
                             TextCommentaire = "Encore un Autre commentaire",
                             VoitureId = 6
                         });
@@ -311,9 +350,13 @@ namespace citycar.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasMaxLength(250)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Prenom")
+                        .IsRequired()
+                        .HasMaxLength(250)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -351,9 +394,13 @@ namespace citycar.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Marque")
+                        .IsRequired()
+                        .HasMaxLength(250)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Modele")
+                        .IsRequired()
+                        .HasMaxLength(250)
                         .HasColumnType("TEXT");
 
                     b.Property<double>("Prix")

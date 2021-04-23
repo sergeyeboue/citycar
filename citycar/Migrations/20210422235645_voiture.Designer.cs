@@ -9,8 +9,8 @@ using citycar.Data;
 namespace citycar.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210422041412_cc")]
-    partial class cc
+    [Migration("20210422235645_voiture")]
+    partial class voiture
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -221,6 +221,7 @@ namespace citycar.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("NomCategories")
+                        .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
@@ -238,6 +239,41 @@ namespace citycar.Migrations
                         {
                             Id = 2,
                             NomCategories = "SUV"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            NomCategories = "Roadster"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            NomCategories = "Cabriolet"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            NomCategories = "Familiale"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            NomCategories = "Coupé"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            NomCategories = "Pickup"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            NomCategories = "voiture sportive"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            NomCategories = "4×4"
                         });
                 });
 
@@ -268,42 +304,42 @@ namespace citycar.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 4, 21, 23, 14, 12, 301, DateTimeKind.Local).AddTicks(7151),
+                            Date = new DateTime(2021, 4, 23, 7, 56, 44, 427, DateTimeKind.Local).AddTicks(8608),
                             TextCommentaire = "Premier commentaire",
                             VoitureId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2021, 4, 21, 23, 14, 12, 304, DateTimeKind.Local).AddTicks(14),
+                            Date = new DateTime(2021, 4, 23, 7, 56, 44, 429, DateTimeKind.Local).AddTicks(4099),
                             TextCommentaire = "Un Autre commentaire",
                             VoitureId = 2
                         },
                         new
                         {
                             Id = 3,
-                            Date = new DateTime(2021, 4, 21, 23, 14, 12, 304, DateTimeKind.Local).AddTicks(116),
+                            Date = new DateTime(2021, 4, 23, 7, 56, 44, 429, DateTimeKind.Local).AddTicks(4153),
                             TextCommentaire = "Encore un Autre commentaire",
                             VoitureId = 3
                         },
                         new
                         {
                             Id = 4,
-                            Date = new DateTime(2021, 4, 21, 23, 14, 12, 304, DateTimeKind.Local).AddTicks(167),
+                            Date = new DateTime(2021, 4, 23, 7, 56, 44, 429, DateTimeKind.Local).AddTicks(4174),
                             TextCommentaire = "Encore un Autre commentaire",
                             VoitureId = 4
                         },
                         new
                         {
                             Id = 5,
-                            Date = new DateTime(2021, 4, 21, 23, 14, 12, 304, DateTimeKind.Local).AddTicks(206),
+                            Date = new DateTime(2021, 4, 23, 7, 56, 44, 429, DateTimeKind.Local).AddTicks(4189),
                             TextCommentaire = "Encore un Autre commentaire",
                             VoitureId = 5
                         },
                         new
                         {
                             Id = 6,
-                            Date = new DateTime(2021, 4, 21, 23, 14, 12, 304, DateTimeKind.Local).AddTicks(299),
+                            Date = new DateTime(2021, 4, 23, 7, 56, 44, 429, DateTimeKind.Local).AddTicks(4212),
                             TextCommentaire = "Encore un Autre commentaire",
                             VoitureId = 6
                         });
@@ -357,7 +393,6 @@ namespace citycar.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Marque")

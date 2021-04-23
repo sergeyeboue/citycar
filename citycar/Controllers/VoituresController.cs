@@ -44,7 +44,7 @@ namespace citycar.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (voiture == null)
             {
-                ViewData["exceptionVoitureId"] = "Cet id " + (id) + " n'existe pas ";
+                ViewData["exceptionVoitureId"] = "Cet id " + id + " n'existe pas ";
                 return View();
             }
 

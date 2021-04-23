@@ -52,7 +52,7 @@ namespace citycar.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    NomCategories = table.Column<string>(type: "TEXT", nullable: true)
+                    NomCategories = table.Column<string>(type: "TEXT", maxLength: 60, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,8 +65,8 @@ namespace citycar.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Nom = table.Column<string>(type: "TEXT", nullable: true),
-                    Prenom = table.Column<string>(type: "TEXT", nullable: true)
+                    Nom = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false),
+                    Prenom = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -185,8 +185,8 @@ namespace citycar.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Marque = table.Column<string>(type: "TEXT", nullable: true),
-                    Modele = table.Column<string>(type: "TEXT", nullable: true),
+                    Marque = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false),
+                    Modele = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false),
                     Cylindree = table.Column<int>(type: "INTEGER", nullable: false),
                     Prix = table.Column<double>(type: "REAL", nullable: false),
                     Image = table.Column<string>(type: "TEXT", nullable: true),
@@ -216,7 +216,7 @@ namespace citycar.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    TextCommentaire = table.Column<string>(type: "TEXT", nullable: true),
+                    TextCommentaire = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
                     VoitureId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
@@ -240,6 +240,41 @@ namespace citycar.Migrations
                 table: "Categories",
                 columns: new[] { "Id", "NomCategories" },
                 values: new object[] { 2, "SUV" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "NomCategories" },
+                values: new object[] { 3, "Roadster" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "NomCategories" },
+                values: new object[] { 4, "Cabriolet" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "NomCategories" },
+                values: new object[] { 5, "Familiale" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "NomCategories" },
+                values: new object[] { 6, "Coupé" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "NomCategories" },
+                values: new object[] { 7, "Pickup" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "NomCategories" },
+                values: new object[] { 8, "voiture sportive" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "NomCategories" },
+                values: new object[] { 9, "4×4" });
 
             migrationBuilder.InsertData(
                 table: "Proprietaire",
@@ -284,32 +319,32 @@ namespace citycar.Migrations
             migrationBuilder.InsertData(
                 table: "Commentaire",
                 columns: new[] { "Id", "Date", "TextCommentaire", "VoitureId" },
-                values: new object[] { 1, new DateTime(2021, 4, 14, 1, 2, 19, 111, DateTimeKind.Local).AddTicks(892), "Premier commentaire", 1 });
+                values: new object[] { 1, new DateTime(2021, 4, 23, 7, 56, 44, 427, DateTimeKind.Local).AddTicks(8608), "Premier commentaire", 1 });
 
             migrationBuilder.InsertData(
                 table: "Commentaire",
                 columns: new[] { "Id", "Date", "TextCommentaire", "VoitureId" },
-                values: new object[] { 2, new DateTime(2021, 4, 14, 1, 2, 19, 113, DateTimeKind.Local).AddTicks(7722), "Un Autre commentaire", 2 });
+                values: new object[] { 2, new DateTime(2021, 4, 23, 7, 56, 44, 429, DateTimeKind.Local).AddTicks(4099), "Un Autre commentaire", 2 });
 
             migrationBuilder.InsertData(
                 table: "Commentaire",
                 columns: new[] { "Id", "Date", "TextCommentaire", "VoitureId" },
-                values: new object[] { 6, new DateTime(2021, 4, 14, 1, 2, 19, 113, DateTimeKind.Local).AddTicks(7857), "Encore un Autre commentaire", 6 });
+                values: new object[] { 6, new DateTime(2021, 4, 23, 7, 56, 44, 429, DateTimeKind.Local).AddTicks(4212), "Encore un Autre commentaire", 6 });
 
             migrationBuilder.InsertData(
                 table: "Commentaire",
                 columns: new[] { "Id", "Date", "TextCommentaire", "VoitureId" },
-                values: new object[] { 3, new DateTime(2021, 4, 14, 1, 2, 19, 113, DateTimeKind.Local).AddTicks(7791), "Encore un Autre commentaire", 3 });
+                values: new object[] { 3, new DateTime(2021, 4, 23, 7, 56, 44, 429, DateTimeKind.Local).AddTicks(4153), "Encore un Autre commentaire", 3 });
 
             migrationBuilder.InsertData(
                 table: "Commentaire",
                 columns: new[] { "Id", "Date", "TextCommentaire", "VoitureId" },
-                values: new object[] { 4, new DateTime(2021, 4, 14, 1, 2, 19, 113, DateTimeKind.Local).AddTicks(7814), "Encore un Autre commentaire", 4 });
+                values: new object[] { 4, new DateTime(2021, 4, 23, 7, 56, 44, 429, DateTimeKind.Local).AddTicks(4174), "Encore un Autre commentaire", 4 });
 
             migrationBuilder.InsertData(
                 table: "Commentaire",
                 columns: new[] { "Id", "Date", "TextCommentaire", "VoitureId" },
-                values: new object[] { 5, new DateTime(2021, 4, 14, 1, 2, 19, 113, DateTimeKind.Local).AddTicks(7832), "Encore un Autre commentaire", 5 });
+                values: new object[] { 5, new DateTime(2021, 4, 23, 7, 56, 44, 429, DateTimeKind.Local).AddTicks(4189), "Encore un Autre commentaire", 5 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

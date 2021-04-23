@@ -44,12 +44,12 @@ namespace citycar.Controllers
         // POST: Commentaires/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int CommentaireId, Voiture voiture)
         {
-            var commentaire = await _context.Commentaire.FindAsync(id);
+            var commentaire = await _context.Commentaire.FindAsync(CommentaireId);
             _context.Commentaire.Remove(commentaire);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Details", "Voitures", new { id = voiture.Id });
         }
 
         private bool CommentaireExists(int id)

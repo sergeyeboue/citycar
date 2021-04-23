@@ -63,29 +63,35 @@
 
 
                     @*Ajouter commentaire*@
-                    <td class="w-100 h-auto" style="display:flex;flex-direction: column">
-                        @foreach (var c in Model.Commentaires)
-                        {
+                <td class="w-100 h-auto" style="display:flex;flex-direction: column">
+                    @foreach (var c in Model.Commentaires)
+                    {
+                    <form asp-controller="Commentaires" asp-action="Delete">
+                        <span>@c.Date : @Html.Raw(c.TextCommentaire) </span>
+                        <input type="hidden" name="CommentaireId" value="@c.Id" />
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <input type="hidden" name="Marque" value="@Model.Marque" />
+                        <input type="hidden" name="Modele" value="@Model.Modele" />
+                        <input type="submit" value="supprimer" />
+                    </form>
+                    }
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <form asp-controller="Commentaires" asp-action="Create">
+                            <textarea id="editor" name="TextCommentaire" rows="5" cols="50"></textarea>
+                            <script>
+                                CKEDITOR.replace(
+                                    'editor');
+                            </script>
 
-                            <span class="float-left">@c.Date - @Html.Raw(@c.TextCommentaire)</span>
-                        }
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <form asp-controller="Commentaires" asp-action="Create">
-                                <textarea id="editor" name="TextCommentaire" rows="5" cols="50"></textarea>
-                                <script>
-                                    CKEDITOR.replace(
-                                        'editor');
-                                </script>
+                            <input type="hidden" name="Date" value="@DateTime.Now" />
+                            <input type="hidden" name="Id" value="@Model.Id" />
+                            <input type="hidden" name="Marque" value="@Model.Marque" />
+                            <input type="hidden" name="Modele" value="@Model.Modele" />
+                            <input style="margin-top:1em" type="submit" class="btn btn-primary" value="Ajouter un commentaire" />
+                        </form>
 
-                                <input type="hidden" name="Date" value="@DateTime.Now" />
-                                <input type="hidden" name="Id" value="@Model.Id" />
-                                <input type="hidden" name="Marque" value="@Model.Marque" />
-                                <input type="hidden" name="Modele" value="@Model.Modele" />
-                                <input style="margin-top:1em" type="submit" class="btn btn-primary" value="Ajouter un commentaire" />
-                            </form>
-
-                        }
+                    }
                     </td>
                 </tr>
             </table>
