@@ -27,7 +27,7 @@ namespace citycar.Data
                 .HasData(
                     new
                     {
-                        
+
                         Id = 1,
                         Marque = "Mercedes",
                         Modele = "G-class 2021",
@@ -116,6 +116,36 @@ namespace citycar.Data
                         CategorieId = 1
                     }
                     );
+            modelBuilder.Entity<Voiture>()
+                .HasData(
+                    new
+                    {
+
+                        Id = 7,
+                        Marque = "Ford",
+                        Modele = "720s",
+                        Cylindree = 8,
+                        Prix = 26549.00,
+                        Image = "7.jpg",
+                        ProprietaireId = 3,
+                        CategorieId = 3
+                    }
+                    );
+            modelBuilder.Entity<Voiture>()
+                .HasData(
+                    new
+                    {
+
+                        Id = 8,
+                        Marque = "Jeep",
+                        Modele = "kjcx8",
+                        Cylindree = 8,
+                        Prix = 30549.00,
+                        Image = "8.jpg",
+                        ProprietaireId = 4,
+                        CategorieId = 4
+                    }
+                    );
             #endregion
 
 
@@ -136,6 +166,24 @@ namespace citycar.Data
                         Id = 2,
                         Nom = "Dupont",
                         Prenom = "Luc"
+                    }
+                    );
+            modelBuilder.Entity<Proprietaire>()
+                .HasData(
+                    new
+                    {
+                        Id = 3,
+                        Nom = "Richard",
+                        Prenom = "Johns"
+                    }
+                    );
+            modelBuilder.Entity<Proprietaire>()
+                .HasData(
+                    new
+                    {
+                        Id = 4,
+                        Nom = "Xavier",
+                        Prenom = "Mensah"
                     }
                     );
             #endregion
