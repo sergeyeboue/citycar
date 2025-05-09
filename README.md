@@ -1,49 +1,56 @@
 # 🚗 CityCar
 
-**CityCar** est une application web développée avec ASP.NET Core MVC permettant de répertorier des véhicules appartenant à différents propriétaires. Chaque véhicule est associé à une catégorie et peut recevoir des commentaires d'utilisateurs. Ce projet met en œuvre les concepts de base de l'architecture MVC ainsi que l'Entity Framework Core pour la gestion de la base de données.
+CityCar est une plateforme web de gestion et de visualisation de véhicules. Elle permet à des propriétaires de proposer des voitures à la location ou à la vente. Les utilisateurs peuvent consulter les véhicules, classés par catégories, ainsi que lire et laisser des commentaires.
 
----
+Le projet a été développé avec le framework ASP.NET Core MVC en C#, avec une base de données intégrée via Entity Framework Core.
 
-## 🔧 Technologies utilisées
+## ✨ Fonctionnalités principales
+
+- Ajout, affichage et gestion de voitures.
+- Système de catégories (SUV, Coupé, Berline...).
+- Gestion des propriétaires.
+- Affichage et enregistrement de commentaires sur les voitures.
+- Intégration d'images de voitures.
+- Données pré-remplies via `HasData` pour la démonstration.
+
+## 🛠️ Technologies utilisées
 
 - ASP.NET Core MVC
-- Entity Framework Core (Code First)
-- ASP.NET Identity (gestion des utilisateurs)
+- Entity Framework Core
+- Identity Framework
+- C#
 - Razor Pages
-- SQL Server LocalDB
-- Bootstrap (frontend)
 
----
+## 💽 Base de données
 
-## 📦 Fonctionnalités
+Le projet utilise un `DbContext` personnalisé (`ApplicationDbContext`) avec des entités :
+- `Voiture`
+- `Proprietaire`
+- `Categories`
+- `Commentaire`
 
-- Gestion des véhicules avec image, prix, marque, modèle, cylindrée
-- Classement des véhicules par catégories (SUV, Berline, Coupé, etc.)
-- Association d’un véhicule à un propriétaire
-- Ajout de commentaires sur les véhicules
-- Authentification utilisateur avec Identity
-- Données de test préchargées (seed data)
+Les données initiales sont injectées dans la base via la méthode `HasData`.
 
----
-
-## 🛠️ Installation et exécution
+## ▶️ Lancer le projet
 ```bash
-### 1. Prérequis
+1. Cloner le projet :
+   
+   git clone https://github.com/sergeyeboue/citycar.git
+2. Ouvrir dans Visual Studio (2022 ou supérieur).
+3. Exécuter les commandes suivantes dans le Package Manager Console :
+   Update-Database
+4.Lancer l’application avec IIS Express ou en CLI avec :
+  dotnet run
+```
 
-- .NET SDK 6.0 ou supérieur
-- Visual Studio 2022 ou VS Code avec C# extension
-- SQL Server LocalDB (installé avec Visual Studio)
+🙌 Auteurs
 
-### 2. Cloner le dépôt
+Ce projet a été développé par :
 
+- Serge Yeboue – @sergeyeboue 
+- @jr922579
+- @kossilaba
 
-git clone https://github.com/sergeyeboue/citycar.git
-cd citycar
+Contributions bienvenues via pull requests ou issues !
 
-### 3. Appliquer les migrations et créer la base de données
-dotnet ef database update
-
-### 4. Lancer l'application
-dotnet run
-Ou via Visual Studio : bouton "Exécuter" ▶️
 
